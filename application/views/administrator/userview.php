@@ -1,4 +1,4 @@
-<a href="<?php echo base_url('administrator/create') ?>" class="btn btn-primary mb-2 ml-2" data-toggle="modal" data-target="#tambahbaru">Tambah User Baru</a>
+<a class="btn btn-primary mb-2 ml-2" data-toggle="modal" data-target="#tambahbaru">Tambah User Baru</a>
 <div class="card shadow mb-2">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Data Dosen</h4>
@@ -23,7 +23,7 @@
                                 <td><?= $u->username; ?></td>
                                 <td><?= $u->userid; ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $u->id; ?>"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -59,7 +59,7 @@
                                 <td><?= $u->username; ?></td>
                                 <td><?= $u->userid; ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $u->id; ?>"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -82,53 +82,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm" action="<?php echo site_url('administrator/create') ?>" method="post" enctype="multipart/form-data">
-
+                <form id="myForm" action="<?php echo site_url('administrator/dashboard/insert')?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="username">Nama*</label>
-                        <input type="username" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama">
+                        <input type="username" class="form-control" id="nama" name="username" placeholder="Masukkan Nama">
                     </div>
                     <div class="form-group">
-                        <label for="username">Username*</label>
-                        <input type="username" class="form-control" id="username" name="username" placeholder="Masukkan Username">
+                        <label for="userid">Username*</label>
+                        <input type="userid" class="form-control" id="userid" name="userid" placeholder="Masukkan NIM/NRP">
                     </div>
-
                     <div class="form-group">
                         <label for="password">Password*</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
+                        <input type="password" class="form-control" id="password" name="userpass" placeholder="Masukkan Password">
                     </div>
                     <div class="form-group">
                         <label for="username">Jenis Akun*</label>
-                        <select class="custom-select">
+                        <select class="custom-select" name="jenisakun">
                             <option selected disabled>Jenis Akun</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="4">4</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Dosen</option>
+                            <option value="3">Mahasiswa</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="username">Aktifkan Akun*</label> <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
+                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif1" value="Ya">
+                            <label class="form-check-label" for="radioaktif1">
                                 Ya
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
+                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Tidak">
+                            <label class="form-check-label" for="radioaktif2">
                                 Tidak
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
+                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Selalu">
+                            <label class="form-check-label" for="radioaktif2">
                                 Selalu
                             </label>
                         </div>
-
                     </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -140,7 +136,8 @@
 </div>
 
 <!-- EDIT DATA USER -->
-<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<?php foreach ($users as $u) {?>
+<div class="modal fade" id="editmodal<?= $u->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -150,51 +147,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm" action="<?php echo site_url('administrator/update') ?>" method="post" enctype="multipart/form-data">
+                <form id="myForm" action="<?php echo site_url('administrator/dashboard/update') ?>" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="username">Nama*</label>
-                        <input type="username" class="form-control" id="nama" name="nama" value="<?php echo "ambil username"; ?>">
+                        <input type="username" class="form-control" id="nama" name="username" value="<?= $u->username; ?>">
                     </div>
                     <div class="form-group">
-                        <label for="username">Username*</label>
-                        <input type="username" class="form-control" id="username" name="username" value="<?php echo "ambil userid"; ?>">
+                        <label for="userid">Username*</label>
+                        <input type="userid" class="form-control" id="userid" name="userid" value="<?= $u->userid; ?>">
                     </div>
-
                     <div class=" form-group">
                         <label for="password">Password*</label>
-                        <input type="password" class="form-control" id="password" name="password" value="<?php echo "ambil password"; ?>">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Kosongkan jika tidak ingin mengganti password">
                     </div>
                     <div class="form-group">
                         <label for="username">Jenis Akun*</label>
-                        <select class="custom-select">
-                            <option selected disabled>Jenis Akun</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="4">4</option>
+                        <select class="custom-select" name="jenisakun">
+                            <!--<option selected disabled>Jenis Akun</option>-->
+                            <option <?php if($u->userrole == 1) { ?> selected <?php } ?>value="1">Admin</option>
+                            <option <?php if($u->userrole == 2) { ?> selected <?php } ?>value="2">Dosen</option>
+                            <option <?php if($u->userrole == 4) { ?> selected <?php } ?>value="3">Mahasiswa</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="username">Aktifkan Akun*</label> <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
+                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif1" value="Ya" <?php if($u->useren == 'Y') { ?> checked <?php } ?>>
+                            <label class="form-check-label" for="radioaktif1">
                                 Ya
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
+                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Tidak" <?php if($u->useren == 'N') { ?> checked <?php } ?>>
+                            <label class="form-check-label" for="radioaktif2">
                                 Tidak
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
+                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Selalu" <?php if($u->useren == 'A') { ?> checked <?php } ?>>
+                            <label class="form-check-label" for="radioaktif2">
                                 Selalu
                             </label>
                         </div>
-
                     </div>
 
             </div>
@@ -206,3 +201,4 @@
         </div>
     </div>
 </div>
+<?php } ?>
