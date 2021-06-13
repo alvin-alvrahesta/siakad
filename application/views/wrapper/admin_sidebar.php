@@ -26,7 +26,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>administrator/user/index">
+                <a class="nav-link" href="<?php echo base_url(); ?>administrator/dashboard/userview">
                     <i class="fas fa-users"></i>
                     <span>Data User</span></a>
             </li>
@@ -77,7 +77,7 @@
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-1 my-2 my-md-0 mw-100 ">
-                        <p>Selamat Datang <strong> <?php echo $username; ?></strong> Sistem Informasi Akademik Universitas </p>
+                        <p>Selamat Datang <strong> <?php echo $myuser['username']; ?></strong> Sistem Informasi Akademik Universitas </p>
                         <!--<div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">

@@ -12,17 +12,23 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
-        $data = [
-			//'id'=> $mydata['id'],
-            'userid'=> $mydata['userid'],
-            'username' => $mydata['username'],
-            'userrole' => $mydata['userrole'],
-            'userlogged' => $mydata['userlogged']
-		];
+        $data['myuser'] = $mydata;
 
         $this->load->view('wrapper/admin_header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
         $this->load->view('administrator/dashboard', $data);
+        $this->load->view('wrapper/admin_footer');
+    }
+
+    public function userview(){
+        $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
+        $data['myuser'] = $mydata;
+        $user = $this->Admin_model->getAll()->result();
+        $data['users'] = $user;
+
+        $this->load->view('wrapper/admin_header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/userview', $data);
         $this->load->view('wrapper/admin_footer');
     }
 }

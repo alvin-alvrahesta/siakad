@@ -1,39 +1,76 @@
+<a href="<?php echo base_url('administrator/create') ?>" class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambahbaru">Tambah User Baru</a>
 <div class="card shadow mb-2">
     <div class="card-header py-3">
-        <h4 class="m-0 font-weight-bold text-primary">Data User</h4>
+        <h4 class="m-0 font-weight-bold text-primary">Data Dosen</h4>
 
     </div>
 
     <div class="card-body">
-        <a href="<?php echo site_url('barang/create') ?>" class="btn btn-primary mb-1" data-toggle="modal" data-target="#tambahbaru">Tambah User Baru</a>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>User Role</th>
+                        <th>Nama</th>
+                        <th>User ID</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <?php foreach ($alluser as $usr) { ?>
+                    <?php foreach ($users as $u) { 
+                        if ($u->userrole == 2) {?>
                         <tr>
-                            <td><?= $usr->id ?></td>
-                            <td><?= $usr->userid ?></td>
-                            <td><?= $usr->useren ?></td>
+                            <td><?= $u->username; ?></td>
+                            <td><?= $u->userid; ?></td>
                             <td>
                                 <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php }
+                } ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<div class="card shadow mb-2">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Data Mahasiswa</h4>
+
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>User ID</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach ($users as $u) { 
+                        if ($u->userrole == 4) {?>
+                        <tr>
+                            <td><?= $u->username; ?></td>
+                            <td><?= $u->userid; ?></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    <?php }
+                } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <!-- Modal add User-->
 <div class="modal fade" id="tambahbaru" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
