@@ -2,14 +2,25 @@
 
 class Mahasiswa extends CI_Controller{
 
+	public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('mahasiswa_model');
+    }
+
 	public function index()
 	{
+		$username=$this->session->userdata('username');
 		//$data['mahasiswa'] = $this->mahasiswa_model->tampil_data('mahasiswa')->result();
 		//$data['prodi'] = $this->prodi_model->tampil_data('profiler_no_db')->result();
-		$this->load->view('wrapper/mahasiswa_header');
+		$data = array(
+			'mhs'=>$this->mahasiswa_model->tampil_data($username)
+			);
+
+		$this->load->view('wrapper/header');
 		$this->load->view('wrapper/mahasiswa_sidebar');
-		$this->load->view('mahasiswa/mahasiswa');//$this->load->view('mahasiswa/mahasiswa', $data);
-		$this->load->view('wrapper/mahasiswa_footer');
+		$this->load->view('mahasiswa/mahasiswa',$data,FALSE);//$this->load->view('mahasiswa/mahasiswa', $data);
+		$this->load->view('wrapper/footer');
 	}
 
 	public function detail($id)
