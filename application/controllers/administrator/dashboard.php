@@ -21,9 +21,12 @@ class Dashboard extends CI_Controller
         $this->load->view('wrapper/footer');
     }
 
-    public function userview(){
+    public function userview()
+    {
+
         $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
         $data['myuser'] = $mydata;
+        $data['title'] = 'Data User';
         $user = $this->Admin_model->getAll()->result();
         $data['users'] = $user;
 

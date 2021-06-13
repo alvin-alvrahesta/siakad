@@ -4,7 +4,7 @@
     </div>
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Selamat Datang</h4>
-        <p>Selamat Datang <strong> <?php echo $username; ?></strong> Sistem Informasi Akademik Universitas xxx, Anda Login sebagai <strong> <?php echo $username; ?></strong></p>
+        <p>Selamat Datang <strong> <?php echo $myuser['username']; ?></strong> Sistem Informasi Akademik Universitas xxx, Anda Login sebagai <strong> <?php echo $myuser['username']; ?></strong></p>
         <hr>
         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-cogs"></i> Control Panel
