@@ -35,12 +35,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-tasks"></i>
-                    <span>Nilai Mahasiswa</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>administrator/user/index">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <span>Data Dosen</span></a>
+                    <span>Data Mata Kuliah</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
