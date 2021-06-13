@@ -1,7 +1,7 @@
 <?php
 
 class Dosen_model extends CI_Model{
-	public $table = 'dosen';
+	/*public $table = 'dosen';
 	public $id = 'id_dosen';
 	public $order = 'DESC';
 
@@ -34,5 +34,5 @@ class Dosen_model extends CI_Model{
 	{
 		$this->db->where($where);
 		$this->db->update($table);
-	}
+	}*/
 }

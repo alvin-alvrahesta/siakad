@@ -17,15 +17,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">SELAMAT DATANG!</h1>
                                     </div>
-                                    <form method="post" action="<?php echo base_url('auth/login')?>" class="user">
+                                    <form method="post" action="<?php base_url('auth')?>" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="InputUsername" aria-describedby="userHelp"
+                                                id="username" aria-describedby="userHelp"
                                                 placeholder="Masukan Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="InputPassword" placeholder="Masukan Password...">
+                                                id="password" placeholder="Masukan Password...">
                                         </div>
                                         <!--<div class="form-group">
                                             <div class="custom-control custom-checkbox small">

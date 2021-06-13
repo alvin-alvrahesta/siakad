@@ -2,17 +2,14 @@
 
 class Mahasiswa_model extends CI_Model{
 
-	public $table = 'mahasiswa';
-	public $id = 'nim';
-	public $order = 'DESC';
-
-	public function tampil_data($table)
+	/*public funtion tampil_data($table)
 	{
 		return $this->db->get($table);
 	}
+
 	public function ambil_id_mahasiswa($id)
 	{
-		$hasil = $this->db->where('id',$id)->get('mahasiswa');
+		$hasil = $this->db->where('id',$id)->('mahasiswa');
 		if($hasil->num_rows() > 0){
 			return $hasil->result();
 		}else{
@@ -35,5 +32,6 @@ class Mahasiswa_model extends CI_Model{
 	{
 		$this->db->where($where);
 		$this->db->update($table);
-	}
+	}*/
+	
 }
