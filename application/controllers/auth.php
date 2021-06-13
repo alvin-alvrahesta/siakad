@@ -3,47 +3,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
 
+	public function __construct()
+    {
+        parent::__construct();
+		$this->load->model('auth_model');
+        $this->load->library('form_validation');
+    }
+
     public function index()
 	{
 		/*$this->load->view('wrapper/auth_header');
         $this->load->view('auth/login');
 		//$this->load->view('welcome_message');
 		*/
-		if ($this->form_validation->run() == false) {
-			$this->form_validation->set_rules('username', 'username', 'trim|required');
-        	$this->form_validation->set_rules('password', 'password', 'trim|required');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('wrapper/auth_header');
 			$this->load->view('auth/login');
 		}else{
-            $this->login();
+            $this->doLogin();
         }
 	}
 
-	private function login()
-    {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-
-        $user = $this->db->get_where('users', ['userid' => $username])->row_array();
-
-		if (!$user){
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username is not registered!</div>');
+	private function doLogin(){
+		$iuser = $this->input->post('username');
+		$ipass = $this->input->post('password');
+		$user = $this->Auth_model->getLoginData($iuser, $ipass);
+		if(!$user){
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password or Username!</div>');
             redirect('auth');
 		}
-
-		if ($user['useren'] == 'N'){
+		if($user->useren == "N"){
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This user has not been activated!</div>');
 			redirect('auth');
 		}
-
-		if (password_verify($password, $user['password']) == FALSE) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
-			redirect('auth');
-		}
-
 		$data = [
 			'userid' => $user['userid'],
-			'userrole' => $user['role_id']
+			'userrole' => $user['userrole']
 		];
 		$this->session->set_userdata($data);
 		if ($user['userrole'] == 1) {
@@ -54,11 +51,12 @@ class Auth extends CI_Controller {
 			redirect('mahasiswa/mahasiswa');
 		}
 
-    }
+	}
 
 	public function logout()
     {
-        $this->session->unset_userdata();
+		$this->session->unset_userdata('userid');
+        $this->session->unset_userdata('userrole');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
         $this->session->sess_destroy();
         redirect('auth');

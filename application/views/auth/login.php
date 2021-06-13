@@ -20,12 +20,12 @@
                                     <form method="post" action="<?php base_url('auth')?>" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="username" aria-describedby="userHelp"
+                                                id="username" name="username" aria-describedby="userHelp"
                                                 placeholder="Masukan Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="password" placeholder="Masukan Password...">
+                                                id="password" name="password" placeholder="Masukan Password...">
                                         </div>
                                         <!--<div class="form-group">
                                             <div class="custom-control custom-checkbox small">
