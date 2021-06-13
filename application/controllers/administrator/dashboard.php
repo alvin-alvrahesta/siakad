@@ -39,20 +39,20 @@ class Dashboard extends CI_Controller
     {
         $jenis = $this->input->post('jenisakun');
         $aktif = $this->input->post('radioaktif');
-        if($jenis==3){
-            $jenis=4;
+        if ($jenis == 3) {
+            $jenis = 4;
         }
-        if($aktif=='Selalu'){
-            $aktif='A';
-            if($jenis != 1){
+        if ($aktif == 'Selalu') {
+            $aktif = 'A';
+            if ($jenis != 1) {
                 redirect(base_url('administrator/dashboard/userview'));
             }
         }
-        if($aktif=='Ya'){
-            $aktif='Y';
+        if ($aktif == 'Ya') {
+            $aktif = 'Y';
         }
-        if($aktif=='Tidak'){
-            $aktif='N';
+        if ($aktif == 'Tidak') {
+            $aktif = 'N';
         }
         $data = array(
             'userid' => $this->input->post('userid'),
@@ -62,27 +62,28 @@ class Dashboard extends CI_Controller
             'userrole' => $jenis
         );
         $data = $this->Admin_model->Insert('users', $data);
-        redirect(base_url('administrator/dashboard/userview'),'refresh');
+        redirect(base_url('administrator/dashboard/userview'), 'refresh');
     }
 
-    public function update(){
+    public function update()
+    {
         $jenis = $this->input->post('jenisakun');
         $aktif = $this->input->post('radioaktif');
         $password = $this->input->post('userpass');
-        if($jenis==3){
-            $jenis=4;
+        if ($jenis == 3) {
+            $jenis = 4;
         }
-        if($aktif=='Selalu'){
-            $aktif='A';
-            if($jenis != 1){
+        if ($aktif == 'Selalu') {
+            $aktif = 'A';
+            if ($jenis != 1) {
                 redirect(base_url('administrator/dashboard/userview'));
             }
         }
-        if($aktif=='Ya'){
-            $aktif='Y';
+        if ($aktif == 'Ya') {
+            $aktif = 'Y';
         }
-        if($aktif=='Tidak'){
-            $aktif='N';
+        if ($aktif == 'Tidak') {
+            $aktif = 'N';
         }
         $data = array(
             'userid' => $this->input->post('userid'),
@@ -90,7 +91,7 @@ class Dashboard extends CI_Controller
             'useren' => $aktif,
             'userrole' => $jenis
         );
-        if ($password){
+        if ($password) {
             $data = array(
                 'userid' => $this->input->post('userid'),
                 'username' => $this->input->post('username'),
@@ -99,7 +100,28 @@ class Dashboard extends CI_Controller
                 'userrole' => $jenis
             );
         }
-        $data = $this->Admin_model->Insert('users', $data);
-        redirect(base_url('administrator/dashboard/userview'),'refresh');
+        $data = $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
+        redirect(base_url('administrator/dashboard/userview'), 'refresh');
+    }
+    public function delete($id = null)
+    {
+        if (!isset($id)) show_404();
+        else {
+
+
+            // $image_path = './upload/user/'; // your image path
+            // $_get_image = $this->db->get_where('user', array('id' => $id));
+
+            // foreach ($_get_image->result() as $record) {
+            //     $filename = $image_path . $record->image;
+            //     if (file_exists($filename)) {
+            //         delete_files($filename);
+            //         unlink($filename);
+            //     }
+            // }
+
+            $this->db->delete('users', array("id" => $id));
+            redirect(base_url('administrator/dashboard/userview'));
+        }
     }
 }

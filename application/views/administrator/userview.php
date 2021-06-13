@@ -24,7 +24,7 @@
                                 <td><?= $u->userid; ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $u->id; ?>"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $u->id; ?>"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                     <?php }
@@ -60,7 +60,7 @@
                                 <td><?= $u->userid; ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $u->id; ?>"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $u->id; ?>"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                     <?php }
@@ -82,7 +82,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm" action="<?php echo site_url('administrator/dashboard/insert')?>" method="post" enctype="multipart/form-data">
+                <form id="myForm" action="<?php echo site_url('administrator/dashboard/insert') ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="username">Nama*</label>
                         <input type="username" class="form-control" id="nama" name="username" placeholder="Masukkan Nama">
@@ -136,69 +136,91 @@
 </div>
 
 <!-- EDIT DATA USER -->
-<?php foreach ($users as $u) {?>
-<div class="modal fade" id="editmodal<?= $u->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="myForm" action="<?php echo site_url('administrator/dashboard/update') ?>" method="post" enctype="multipart/form-data">
+<?php foreach ($users as $u) { ?>
+    <div class="modal fade" id="editmodal<?= $u->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="myForm" action="<?php echo site_url('administrator/dashboard/update') ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" class="form-control" id="id" name="id" value="<?= $u->id; ?>">
+                        <div class="form-group">
+                            <label for="username">Nama*</label>
+                            <input type="username" class="form-control" id="nama" name="username" value="<?= $u->username; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="userid">Username*</label>
+                            <input type="userid" class="form-control" id="userid" name="userid" value="<?= $u->userid; ?>">
+                        </div>
+                        <div class=" form-group">
+                            <label for="password">Password*</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Kosongkan jika tidak ingin mengganti password">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Jenis Akun*</label>
+                            <select class="custom-select" name="jenisakun">
+                                <!--<option selected disabled>Jenis Akun</option>-->
+                                <option <?php if ($u->userrole == 1) { ?> selected <?php } ?>value="1">Admin</option>
+                                <option <?php if ($u->userrole == 2) { ?> selected <?php } ?>value="2">Dosen</option>
+                                <option <?php if ($u->userrole == 4) { ?> selected <?php } ?>value="3">Mahasiswa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Aktifkan Akun*</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif1" value="Ya" <?php if ($u->useren == 'Y') { ?> checked <?php } ?>>
+                                <label class="form-check-label" for="radioaktif1">
+                                    Ya
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Tidak" <?php if ($u->useren == 'N') { ?> checked <?php } ?>>
+                                <label class="form-check-label" for="radioaktif2">
+                                    Tidak
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Selalu" <?php if ($u->useren == 'A') { ?> checked <?php } ?>>
+                                <label class="form-check-label" for="radioaktif2">
+                                    Selalu
+                                </label>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="username">Nama*</label>
-                        <input type="username" class="form-control" id="nama" name="username" value="<?= $u->username; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="userid">Username*</label>
-                        <input type="userid" class="form-control" id="userid" name="userid" value="<?= $u->userid; ?>">
-                    </div>
-                    <div class=" form-group">
-                        <label for="password">Password*</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Kosongkan jika tidak ingin mengganti password">
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Jenis Akun*</label>
-                        <select class="custom-select" name="jenisakun">
-                            <!--<option selected disabled>Jenis Akun</option>-->
-                            <option <?php if($u->userrole == 1) { ?> selected <?php } ?>value="1">Admin</option>
-                            <option <?php if($u->userrole == 2) { ?> selected <?php } ?>value="2">Dosen</option>
-                            <option <?php if($u->userrole == 4) { ?> selected <?php } ?>value="3">Mahasiswa</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Aktifkan Akun*</label> <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif1" value="Ya" <?php if($u->useren == 'Y') { ?> checked <?php } ?>>
-                            <label class="form-check-label" for="radioaktif1">
-                                Ya
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Tidak" <?php if($u->useren == 'N') { ?> checked <?php } ?>>
-                            <label class="form-check-label" for="radioaktif2">
-                                Tidak
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="radioaktif" id="radioaktif2" value="Selalu" <?php if($u->useren == 'A') { ?> checked <?php } ?>>
-                            <label class="form-check-label" for="radioaktif2">
-                                Selalu
-                            </label>
-                        </div>
-                    </div>
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <input class="btn btn-success" type="submit" name="btn" value="Simpan" />
+                </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                <input class="btn btn-success" type="submit" name="btn" value="Simpan" />
-            </div>
-            </form>
         </div>
     </div>
-</div>
+<?php } ?>
+
+
+<!-- DELETE USER -->
+<?php foreach ($users as $u) { ?>
+    <div class="modal fade" id="deletemodal<?= $u->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Apakah Anda Yakin?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a id="btn-delete" class="btn btn-danger" href="<?php echo site_url('administrator/dashboard/delete/' . $u->id) ?>">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php } ?>
