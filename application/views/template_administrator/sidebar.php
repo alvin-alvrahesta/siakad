@@ -42,7 +42,7 @@
                         <a class="collapse-item" href="cards.html">KRS</a>
                         <a class="collapse-item" href="buttons.html">Input Nilai</a>
                         <a class="collapse-item" href="cards.html">Cetak Transkrip</a>
-                        <a class="collapse-item" href="buttons.html">Dosen</a>
+                        <a class="collapse-item" href="<?php echo base_url('administrator/dosen') ?>">Dosen</a>
 
                     </div>
                 </div>
