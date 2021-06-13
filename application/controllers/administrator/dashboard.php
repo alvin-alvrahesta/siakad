@@ -100,28 +100,41 @@ class Dashboard extends CI_Controller
                 'userrole' => $jenis
             );
         }
-        $data = $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
+        $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
         redirect(base_url('administrator/dashboard/userview'), 'refresh');
     }
+
     public function delete($id = null)
     {
-        if (!isset($id)) show_404();
-        else {
+        if (!isset($id)){
+            show_404();
+        } 
 
-
-            // $image_path = './upload/user/'; // your image path
-            // $_get_image = $this->db->get_where('user', array('id' => $id));
-
-            // foreach ($_get_image->result() as $record) {
-            //     $filename = $image_path . $record->image;
-            //     if (file_exists($filename)) {
-            //         delete_files($filename);
-            //         unlink($filename);
-            //     }
-            // }
-
-            $this->db->delete('users', array("id" => $id));
-            redirect(base_url('administrator/dashboard/userview'));
+        // $image_path = './upload/user/'; // your image path
+        // $_get_image = $this->db->get_where('user', array('id' => $id));
+        // foreach ($_get_image->result() as $record) {
+        //     $filename = $image_path . $record->image;
+        //     if (file_exists($filename)) {
+        //         delete_files($filename);
+        //         unlink($filename);
+        //     }
+        // }
+        
+        $u = $this->Admin_model->getid($id);
+        /*$u_data = [
+            'userid' => $u->userid, 
+            'userrole' => $u->userrole
+        ];*/
+        $role = $u['userrole'];
+        $uid = $u['userid'];
+        if($role==2){
+            $this->Admin_model->Delete('dosen', array("nrp" => $uid));
         }
+        if($role==4){
+            $this->Admin_model->Delete('mahasiswa', array("nim" => $uid));
+        }
+        $this->Admin_model->Delete('users', array("id" => $id));
+        $this->db->delete('users', array("id" => $id));
+        redirect(base_url('administrator/dashboard/userview'));
     }
 }
