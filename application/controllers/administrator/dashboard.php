@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller
         $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
         $data['myuser'] = $mydata;
         $data['title'] = 'Data User';
-        $user = $this->Admin_model->getAll()->result();
+        $user = $this->Admin_model->getAll('users')->result();
         $data['users'] = $user;
 
         $this->load->view('wrapper/header', $data);
@@ -120,7 +120,7 @@ class Dashboard extends CI_Controller
         //     }
         // }
 
-        $u = $this->Admin_model->getid($id);
+        $u = $this->Admin_model->getdatatableby('users', 'id', $id);
         /*$u_data = [
             'userid' => $u->userid, 
             'userrole' => $u->userrole
@@ -134,15 +134,15 @@ class Dashboard extends CI_Controller
             $this->Admin_model->Delete('mahasiswa', array("nim" => $uid));
         }
         $this->Admin_model->Delete('users', array("id" => $id));
-        $this->db->delete('users', array("id" => $id));
         redirect(base_url('administrator/dashboard/userview'));
     }
+
     public function makulview()
     {
         // $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
         // $data['myuser'] = $mydata;
         $data['title'] = 'Data Mata Kuliah';
-        $makul = $this->Admin_model->getMakulAll()->result();
+        $makul = $this->Admin_model->getAll('matakuliah')->result();
         $data['makuls'] = $makul;
 
         $this->load->view('wrapper/header', $data);
@@ -150,6 +150,7 @@ class Dashboard extends CI_Controller
         $this->load->view('administrator/makulview', $data);
         $this->load->view('wrapper/footer');
     }
+
     public function insert_makul()
     {
         $id_makul = $this->input->post('id_makul');
@@ -159,9 +160,10 @@ class Dashboard extends CI_Controller
             'id_makul' => $id_makul,
             'nama_makul' => $nama_makul,
         );
-        $data = $this->Admin_model->InsertMakul('matakuliah', $data);
+        $data = $this->Admin_model->Insert('matakuliah', $data);
         redirect(base_url('administrator/dashboard/makulview'), 'refresh');
     }
+
     public function update_makul()
     {
 
@@ -173,25 +175,32 @@ class Dashboard extends CI_Controller
         $this->Admin_model->Update('matakuliah', $data, array('id_makul' => $this->input->post('id_makul')));
         redirect(base_url('administrator/dashboard/makulview'), 'refresh');
     }
+
     public function delete_makul($id_makul = null)
     {
-        if (!isset($id_makul)) show_404();
-        else {
-
-
-            // $image_path = './upload/user/'; // your image path
-            // $_get_image = $this->db->get_where('user', array('id' => $id));
-
-            // foreach ($_get_image->result() as $record) {
-            //     $filename = $image_path . $record->image;
-            //     if (file_exists($filename)) {
-            //         delete_files($filename);
-            //         unlink($filename);
-            //     }
-            // }
-
-            $this->db->delete('matakuliah', array("id_makul" => $id_makul));
-            redirect(base_url('administrator/dashboard/makulview'));
+        if (!isset($id_makul)) {
+            show_404();
         }
+
+        // $image_path = './upload/user/'; // your image path
+        // $_get_image = $this->db->get_where('user', array('id' => $id));
+        // foreach ($_get_image->result() as $record) {
+        //     $filename = $image_path . $record->image;
+        //     if (file_exists($filename)) {
+        //         delete_files($filename);
+        //         unlink($filename);
+        //     }
+        // }
+
+        $u = $this->Admin_model->getdatatableby('matakuliah', 'id_makul', $id_makul);
+        /*$u_data = [
+            'userid' => $u->userid, 
+            'userrole' => $u->userrole
+        ];*/
+        $mid = $u['id_makul'];
+        $this->Admin_model->Delete('dosen', array("id_makul" => $mid));
+        $this->Admin_model->Delete('mahasiswa', array("matakuliah" => $mid));
+        $this->Admin_model->Delete('matakuliah', array("id_makul" => $mid));
+        redirect(base_url('administrator/dashboard/makulview'));
     }
 }

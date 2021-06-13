@@ -2,7 +2,6 @@
 <div class="card shadow mb-2">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Data Mata Kuliah</h4>
-
     </div>
 
     <div class="card-body">
@@ -10,7 +9,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID Mata Kuliah</th>
+                        <!--<th>ID Mata Kuliah</th>-->
                         <th>Mata Kuliah</th>
                         <th>Aksi</th>
                     </tr>
@@ -19,7 +18,7 @@
                 <tbody>
                     <?php foreach ($makuls as $mkl) { ?>
                         <tr>
-                            <td><?= $mkl->id_makul; ?></td>
+                            <!--<td><?= $mkl->id_makul; ?></td>-->
                             <td><?= $mkl->nama_makul; ?></td>
                             <td>
                                 <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $mkl->id_makul; ?>"><i class="fas fa-edit"></i></button>
@@ -79,11 +78,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="myForm" action="<?php echo site_url('administrator/dashboard/update_makul') ?>" method="post" enctype="multipart/form-data">
-
-                        <div class="form-group">
-                            <label for="userid">ID Mata Kuliah*</label>
-                            <input type="userid" class="form-control" id="id_makul" name="id_makul" value="<?= $mkl->id_makul; ?>" disabled>
-                        </div>
+                        <input type="hidden" class="form-control" id="id_makul" name="id_makul" value="<?= $mkl->id_makul; ?>">
                         <div class=" form-group">
                             <label for="username">Nama Mata Kuliah*</label>
                             <input type="text" class="form-control" id="nama_makul" name="nama_makul" value="<?= $mkl->nama_makul; ?>">

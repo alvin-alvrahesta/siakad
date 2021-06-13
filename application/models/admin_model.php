@@ -7,19 +7,14 @@ class Admin_model extends CI_Model
         return $this->db->get_where('users', ['userid' => $userid])->row_array();
     }
 
-    public function getid($id)
-    {
-        return $this->db->get_where('users', ['id' => $id])->row_array();
-    }
-
-    public function getuseridtableby($table, $by, $userid)
+    public function getdatatableby($table, $by, $userid)
     {
         return $this->db->get_where($table, [$by => $userid])->row_array();
     }
 
-    public function getAll()
+    public function getAll($table)
     {
-        return $this->db->get('users');
+        return $this->db->get($table);
     }
 
     public function Insert($table, $data)
@@ -36,18 +31,5 @@ class Admin_model extends CI_Model
     {
         return $this->db->delete($table, $where);
     }
-    public function getMakulAll()
-    {
-        return $this->db->get('matakuliah');
-    }
 
-    public function InsertMakul($table, $data)
-    {
-        return $this->db->insert($table, $data);
-    }
-
-    public function DeleteMakul($table, $where)
-    {
-        return $this->db->delete($table, $where);
-    }
 }
