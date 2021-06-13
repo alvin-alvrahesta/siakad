@@ -35,6 +35,56 @@ class Dashboard extends CI_Controller
         $this->load->view('wrapper/footer');
     }
 
+    public function makulview()
+    {
+        // $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
+        // $data['myuser'] = $mydata;
+        $data['title'] = 'Data Mata Kuliah';
+        $makul = $this->Admin_model->getAll('matakuliah')->result();
+        $data['makuls'] = $makul;
+
+        $this->load->view('wrapper/header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/makulview', $data);
+        $this->load->view('wrapper/footer');
+    }
+
+    public function profile()
+    {
+        $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
+        $data['myuser'] = $mydata;
+        $data['title'] = 'Profil';
+
+        $this->load->view('wrapper/header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/profile', $data);
+        $this->load->view('wrapper/footer');
+    }
+
+    public function editprofile()
+    {
+        $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
+        $data['myuser'] = $mydata;
+        $data['title'] = 'Edit Profil';
+
+        $this->load->view('wrapper/header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/editprofile', $data);
+        $this->load->view('wrapper/footer');
+    }
+
+    public function changepassword()
+    {
+        $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
+        $data['myuser'] = $mydata;
+        $data['title'] = 'Ganti Password';
+
+        $this->load->view('wrapper/header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/changepassword', $data);
+        $this->load->view('wrapper/footer');
+    }
+
     public function insert()
     {
         $jenis = $this->input->post('jenisakun');
@@ -137,20 +187,6 @@ class Dashboard extends CI_Controller
         redirect(base_url('administrator/dashboard/userview'));
     }
 
-    public function makulview()
-    {
-        // $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
-        // $data['myuser'] = $mydata;
-        $data['title'] = 'Data Mata Kuliah';
-        $makul = $this->Admin_model->getAll('matakuliah')->result();
-        $data['makuls'] = $makul;
-
-        $this->load->view('wrapper/header', $data);
-        $this->load->view('wrapper/admin_sidebar', $data);
-        $this->load->view('administrator/makulview', $data);
-        $this->load->view('wrapper/footer');
-    }
-
     public function insert_makul()
     {
         $id_makul = $this->input->post('id_makul');
@@ -203,4 +239,43 @@ class Dashboard extends CI_Controller
         $this->Admin_model->Delete('matakuliah', array("id_makul" => $mid));
         redirect(base_url('administrator/dashboard/makulview'));
     }
+
+    public function updateprofile()
+    {
+        $data = array(
+            'userid' => $this->input->post('userid'),
+            'username' => $this->input->post('username')
+        );
+		$this->session->set_userdata($data);
+        $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
+        redirect(base_url('administrator/dashboard/profile'), 'refresh');
+    }
+
+    public function updatepassword()
+    {
+        $id = $this->input->post('id');
+        $old = $this->input->post('cur_pass');
+        $new = $this->input->post('new_pass1');
+        $rep = $this->input->post('new_pass2');
+
+        $u = $this->Admin_model->getdatatableby('users', 'id', $id);
+
+        if(md5($old) != $u['userpass']){
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password!</div>');
+            redirect(base_url('administrator/dashboard/changepassword'));
+        }
+
+        if($new != $rep){
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password did not match!</div>');
+            redirect(base_url('administrator/dashboard/changepassword'));
+        }
+
+        $data = array(
+            'userpass' => md5($this->input->post('cur_pass'))
+        );
+
+        $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
+        redirect(base_url('administrator/dashboard/profile'), 'refresh');
+    }
 }
+
