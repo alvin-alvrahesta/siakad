@@ -14,8 +14,11 @@
                             <!--<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
                             <div class="col-lg-12">
                                 <div class="p-5">
+									<div class="text-center">
+                                        <img src="<?php echo base_url() ?>assets/img/logoujb24.png">
+                                    </div>
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">SELAMAT DATANG!</h1>
+										<br><h1 class="h4 text-gray-900 mb-4">Sistem Informasi Akademik</h1>
                                     </div>
                                     <form method="post" action="<?php base_url('auth')?>" class="user">
                                         <div class="form-group">
@@ -46,11 +49,9 @@
                                         </a>-->
                                     </form>
                                     <hr>
+									<?php echo $this->session->flashdata('message'); ?>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
