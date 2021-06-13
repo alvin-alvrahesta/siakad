@@ -6,14 +6,6 @@ class Admin_model extends CI_Model
         return $this->db->get_where('users', ['userid' => $userid])->row_array();
     }
 
-    public function getid($id){
-        return $this->db->get_where('users', ['id' => $id])->row_array();
-    }
-
-    public function getuseridtableby($table, $by, $userid){
-        return $this->db->get_where($table, [$by => $userid])->row_array();
-    }
-
     public function getAll()
     {
         return $this->db->get('users');
