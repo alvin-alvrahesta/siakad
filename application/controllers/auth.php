@@ -6,8 +6,7 @@ class Auth extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-		$this->load->model('auth_model');
-        $this->load->library('form_validation');
+		$this->load->model('Auth_model');
     }
 
     public function index()
@@ -40,23 +39,28 @@ class Auth extends CI_Controller {
 		}
 		$data = [
 			'userid' => $user['userid'],
-			'userrole' => $user['userrole']
+			'userrole' => $user['userrole'],
+			'username' => $user['username']
 		];
 		$this->session->set_userdata($data);
 		if ($user['userrole'] == 1) {
 			redirect('administrator/dashboard');
-		} else if ($user['userrole'] == 2) {
+		} 
+		if ($user['userrole'] == 2) {
 			redirect('dosen/dosen');
-		} else if ($user['userrole'] == 4) {
+		} 
+		if ($user['userrole'] == 4) {
 			redirect('mahasiswa/mahasiswa');
 		}
-
+		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error loading user data!</div>');
+		redirect('auth');
 	}
 
 	public function logout()
     {
 		$this->session->unset_userdata('userid');
         $this->session->unset_userdata('userrole');
+		$this->session->unset_userdata('username');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
         $this->session->sess_destroy();
         redirect('auth');

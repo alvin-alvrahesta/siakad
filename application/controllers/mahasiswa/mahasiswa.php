@@ -36,8 +36,7 @@ class Mahasiswa extends CI_Controller{
 
 		if($this->form_validation->run() == FALSE) {
 			$this->tambah_mahasiswa();
-		}
-		else{
+		}else{
 			$nim = $this->input->post('nim');
 			$nama_lengkap = $this->input->post('nama_lengkap');
 			$alamat = $this->input->post('alamat');
