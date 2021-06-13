@@ -130,14 +130,11 @@ class Dashboard extends CI_Controller
         if($role==2){
             $this->Admin_model->Delete('dosen', array("nrp" => $uid));
         }
-<<<<<<< HEAD
-=======
         if($role==4){
             $this->Admin_model->Delete('mahasiswa', array("nim" => $uid));
         }
         $this->Admin_model->Delete('users', array("id" => $id));
         $this->db->delete('users', array("id" => $id));
         redirect(base_url('administrator/dashboard/userview'));
->>>>>>> parent of fd3f465 (27-CRUD mata kuliah [hufron])
     }
 }
