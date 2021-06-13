@@ -13,11 +13,12 @@ class Dashboard extends CI_Controller
     {
         $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
         $data['myuser'] = $mydata;
+        $data['title'] = 'Dashboard Admin';
 
-        $this->load->view('wrapper/admin_header', $data);
+        $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
         $this->load->view('administrator/dashboard', $data);
-        $this->load->view('wrapper/admin_footer');
+        $this->load->view('wrapper/footer');
     }
 
     public function userview(){
@@ -26,9 +27,9 @@ class Dashboard extends CI_Controller
         $user = $this->Admin_model->getAll()->result();
         $data['users'] = $user;
 
-        $this->load->view('wrapper/admin_header', $data);
+        $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
         $this->load->view('administrator/userview', $data);
-        $this->load->view('wrapper/admin_footer');
+        $this->load->view('wrapper/footer');
     }
 }
