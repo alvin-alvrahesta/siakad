@@ -12,6 +12,11 @@ class Admin_model extends CI_Model
         return $this->db->get_where($table, [$by => $userid])->row_array();
     }
 
+    public function getresultdatatableby($table, $by, $userid)
+    {
+        return $this->db->get_where($table, [$by => $userid])->result();
+    }
+
     public function getAll($table)
     {
         return $this->db->get($table);

@@ -12,11 +12,6 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $username = $this->session->userdata('username');
-
-        // $data = array(
-        //     'dosen' => $this->Dosen_model->tampil_data($username),
-        //     'makuls' => $this->Admin_model->getAll('matakuliah')->result(),
-        // );
         $mydata = $this->Admin_model->getuserid($this->session->userdata('userid'));
         $data['myuser'] = $mydata;
         $data['title'] = 'Dashboard Admin';
@@ -24,12 +19,6 @@ class Dashboard extends CI_Controller
         $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
         $this->load->view('administrator/dashboard', $data);
-        // -------------------------------------------------------------------------- 
-
-        // $this->load->view('wrapper/header');
-        // $this->load->view('wrapper/dosen_sidebar');
-        // $this->load->view('dosen/dosenview', $data, FALSE);
-        // $this->load->view('wrapper/footer');
         $this->load->view('wrapper/footer');
     }
 
@@ -58,6 +47,31 @@ class Dashboard extends CI_Controller
         $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
         $this->load->view('administrator/makulview', $data);
+        $this->load->view('wrapper/footer');
+    }
+
+    public function detailmakulview($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        $data['title'] = 'Pilih Matakuliah';
+        
+        $u = $this->Admin_model->getdatatableby('users', 'id', $id);
+        $role = $u['userrole'];
+        $uid = $u['userid'];
+        if ($role == 2) {
+            $u2 = $this->Admin_model->getdatatableby('dosen', 'nrp', $uid);
+        }
+        if ($role == 4) {
+            $u2 = $this->Admin_model->getdatatableby('mahasiswa', 'nim', $uid);
+        }
+        $data['user'] = $u2;
+        
+        $this->load->view('wrapper/header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/ampu_makul');
         $this->load->view('wrapper/footer');
     }
 
@@ -289,12 +303,5 @@ class Dashboard extends CI_Controller
         $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
         redirect(base_url('administrator/dashboard/profile'), 'refresh');
     }
-    public function ampu_makul()
-    {
-        $data['title'] = 'Edit Pengampu';
-
-        $this->load->view('wrapper/header', $data);
-        $this->load->view('wrapper/admin_sidebar');
-        $this->load->view('administrator/ampu_makul');
-    }
+    
 }
