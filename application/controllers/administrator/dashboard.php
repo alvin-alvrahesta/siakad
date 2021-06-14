@@ -69,6 +69,8 @@ class Dashboard extends CI_Controller
         }
         $data['user'] = $u2;
         $data['role'] = $role;
+        $makul = $this->Admin_model->getAll('matakuliah')->result();
+        $data['makuls'] = $makul;
         $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
         $this->load->view('administrator/ampu_makul', $data);
@@ -264,6 +266,26 @@ class Dashboard extends CI_Controller
         $this->Admin_model->Delete('mahasiswa', array("matakuliah" => $mid));
         $this->Admin_model->Delete('matakuliah', array("id_makul" => $mid));
         redirect(base_url('administrator/dashboard/makulview'));
+    }
+
+    public function delete_pmakul()
+    {
+        $userrole = $this->uri->segment(4);
+        $userid =  $this->uri->segment(5);
+        $id_makul =  $this->uri->segment(6);
+        if (!isset($id_makul) || !isset($userid)) {
+            show_404();
+        }
+        if ($userrole == 2) {
+            $this->Admin_model->Delete('dosen', "nrp = '$userid' AND id_makul = '$id_makul'");
+        }
+        if ($userrole == 4) {
+            $this->Admin_model->Delete('mahasiswa', "nim = '$userid' AND id_makul = '$id_makul'");
+        }
+
+        $id = $this->Admin_model->getuserid($userid);
+
+        redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
     }
 
     public function updateprofile()
