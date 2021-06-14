@@ -31,5 +31,12 @@ class Admin_model extends CI_Model
     {
         return $this->db->delete($table, $where);
     }
-
+    // public function JoinTable($id_makul)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('matakuliah');
+    //     $this->db->join('dosen', 'matakuliah.id_makul = dosen.id_makul', 'inner');
+    //     $this->db->where('id_makul', $id_makul);
+    //     return $this->db->get()->result();
+    // }
 }
