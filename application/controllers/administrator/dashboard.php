@@ -63,9 +63,13 @@ class Dashboard extends CI_Controller
         $uid = $u['userid'];
         if ($role == 2) {
             $u2 = $this->Admin_model->getresultdatatableby('dosen', 'nrp', $uid);
+            $data['userid'] = $u2['0']->nrp;
+            echo $data['userid'];
         }
         if ($role == 4) {
             $u2 = $this->Admin_model->getresultdatatableby('mahasiswa', 'nim', $uid);
+            $data['userid'] = $u2['0']->nim;
+            echo $data['userid'];
         }
         $data['user'] = $u2;
         $data['role'] = $role;
@@ -266,6 +270,37 @@ class Dashboard extends CI_Controller
         $this->Admin_model->Delete('mahasiswa', array("matakuliah" => $mid));
         $this->Admin_model->Delete('matakuliah', array("id_makul" => $mid));
         redirect(base_url('administrator/dashboard/makulview'));
+    }
+
+    public function insert_pmakul()
+    {
+        $userid = $this->input->post('userid');
+        $id_makul = $this->input->post('id_makul');
+        $userrole = $this->input->post('userrole');
+        $data = null;
+        $role = null;
+        $uid = null;
+        if ($userrole==2){
+            $role='dosen';
+            $uid ='nrp';
+        }
+        if ($userrole==4){
+            $role = 'mahasiswa';
+            $uid = 'nim';
+        }
+        $query = $this->Admin_model->getwhere($role, array($uid => $userid, 'id_makul' => $id_makul));
+        $id = $this->Admin_model->getuserid($userid);
+        if($query->num_rows()){
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Mata kuliah sudah dipilih!</div>');
+            redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
+        }
+        $data = array(
+            $uid => $userid,
+            'id_makul' => $id_makul
+        );
+        $data = $this->Admin_model->Insert($role, $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Mata kuliah berhasil dipilih!</div>');
+        redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
     }
 
     public function delete_pmakul()

@@ -70,9 +70,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm" action="<?php echo site_url('administrator/dashboard/tambahpilihmakul') ?>" method="post" enctype="multipart/form-data">
+                <form id="myForm" action="<?php echo site_url('administrator/dashboard/insert_pmakul') ?>" method="post" enctype="multipart/form-data">
 
                     <label>Pilih Mata Kuliah yang ingin diampu</label>
+                    <input readonly type="hidden" class="form-control" id="userid" name="userid" value="<?php if ($role == 2) {
+                                    echo $userid;
+                                }
+                                if ($role == 4) {
+                                    echo $userid;
+                                } ?>">
+                    <input readonly type="hidden" class="form-control" id="userrole" name="userrole" value="<?php echo $role ?>">
                     <select name="id_makul" class="form-control">
                         <option disabled value="">-- Pilih Mata Kuliah --</option>
                         <?php foreach ($makuls as $data) : ?>
