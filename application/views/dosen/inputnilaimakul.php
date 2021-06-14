@@ -2,18 +2,15 @@
 
 
 	<div class="alert alert-success" role="alert">
-		<i class="fas fa-university"></i> Mata Kuliah yang Anda Ampu
+		<i class="fas fa-university"></i> Input Nilai Mata Kuliah Bernama X
 	</div>
 
 	<?php echo $this->session->flashdata('pesan') ?>
-    <a class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambahmakul"><i class="fas fa-plus fa-sm fa-fw"></i>Tambah Mata Kuliah yang Diampu</a>
-	<table class="table table-striped table-hover table-bordered">
+	<!-- <table class="table table-striped table-hover table-bordered">
 		<tr>
 			<th>NO</th>
-			<th>NRP</th>
-			<th>NAMA LENGKAP</th>
 			<th>MATA KULIAH</th>
-			<th colspan="3">AKSI</th>
+			<th colspan="2">AKSI</th>
 		</tr>
 		<?php
 
@@ -22,15 +19,13 @@
 
 			<tr>
 				<td><?= $no++ ?></td>
-				<td><?= $data->nrp ?></td>
-				<td><?= $data->username ?></td>
 				<td><?= $data->nama_makul ?></td>
-				<td width="20px"><button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editmodal<?= $data->id; ?>"><i class="fas fa-edit"></i></button></td>
+				<td width="150px"> <a href="<?php echo site_url('dosen/dashboard/inputnilaimakul'. $data->id_makul ) ?>"><button class="btn btn-sm btn-primary" name="makul<?= $data->id_makul; ?>"><i class="fas fa-edit"></i> Input Nilai </button></a></td>
 				<td width="20px"><button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $data->id; ?>"><i class="fas fa-trash"></i></button></td>
             </tr>
 
 		<?php endforeach; ?>
-	</table>
+	</table> -->
 
     <!-- Modal add Mata KUliah-->
 <div class="modal fade" id="tambahmakul" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

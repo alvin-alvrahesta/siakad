@@ -35,6 +35,34 @@ class Dashboard extends CI_Controller
 		$this->load->view('dosen/dosenview',$data,FALSE);
 		$this->load->view('wrapper/footer');
 	}
+    
+    public function inputnilaiview()
+	{
+		$username=$this->session->userdata('username');
+
+		$data = array(
+			'dosen'=>$this->Dosen_model->tampil_data($username),
+			'makuls'=>$this->Admin_model->getAll('matakuliah')->result(),
+			);
+		$this->load->view('wrapper/header');
+		$this->load->view('wrapper/dosen_sidebar');
+		$this->load->view('dosen/inputnilaiview',$data,FALSE);
+		$this->load->view('wrapper/footer');
+	}
+
+    public function inputnilaimakul1()
+	{
+		$username=$this->session->userdata('username');
+
+		$data = array(
+			'dosen'=>$this->Dosen_model->tampil_data($username),
+			'makuls'=>$this->Admin_model->getAll('matakuliah')->result(),
+			);
+		$this->load->view('wrapper/header');
+		$this->load->view('wrapper/dosen_sidebar');
+		$this->load->view('dosen/inputnilaimakul',$data,FALSE);
+		$this->load->view('wrapper/footer');
+	}    
 
     public function insert_makul()
     {
