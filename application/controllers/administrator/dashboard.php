@@ -297,7 +297,7 @@ class Dashboard extends CI_Controller
         }
 
         $data = array(
-            'userpass' => md5($this->input->post('cur_pass'))
+            'userpass' => md5($this->input->post('new_pass1'))
         );
 
         $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));

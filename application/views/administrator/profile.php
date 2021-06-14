@@ -4,7 +4,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="<?= base_url('administrator') ?>">Dashboard</a>
+            <a href="<?= base_url('administrator/dashboard') ?>">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">My Profil</li>
     </ol>

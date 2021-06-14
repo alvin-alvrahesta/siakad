@@ -42,7 +42,7 @@
 <div class="card mb-4 py-3 border-left-secondary" style="max-width: 540px;">
 	<div class="card-body">
 		<div>
-			<a href="<?php echo base_url("mahasiswa/mahasiswa/changepassword") ?>" class="small-box-footer">Ganti Password <i class="fas fa-arrow-circle-right"></i></a>
+			<a href="<?php echo base_url("mahasiswa/changepassword") ?>" class="small-box-footer">Ganti Password <i class="fas fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
 </div>

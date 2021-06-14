@@ -3,15 +3,15 @@
 
                     <!-- Breadcrumbs-->
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="<?= base_url('administrator/dashboard') ?>">Dashboard</a>
+						<li class="breadcrumb-item">
+                            <a href="<?= base_url('mahasiswa/mahasiswa') ?>">Dashboard</a>
                         </li>
 
                         <li class="breadcrumb-item">
-                            <a href="<?= base_url('administrator/dashboard/profile') ?>"><?php echo $myuser['username']; ?></a>
+                            <a href="<?= base_url('mahasiswa/profil') ?>"><?php echo $profil->username ?></a>
                         </li>
 
-                        <li class="breadcrumb-item active">Ganti Password</li>
+                        <li class="breadcrumb-item active">Edit Profil</li>
                     </ol>
 
                     <!-- Page Heading -->
@@ -22,8 +22,8 @@
 
                             <?= $this->session->flashdata('message'); ?>
 
-                            <form action="<?= base_url('administrator/dashboard/updatepassword') ?>" method="post">
-                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $myuser['id']; ?>">
+                            <form action="<?= base_url('mahasiswa/changepassword/updatepassword') ?>" method="post">
+                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $profil->id ?>">
                                 <div class="form-group">
                                     <label for="current_password">Current Password</label>
                                     <input type="password" class="form-control" id="current_password" name="cur_pass">
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="new_pass1">New Password</label>
-                                    <input type="text" class="form-control" id="new_pass1" name="new_pass1">
+                                    <input type="password" class="form-control" id="new_pass1" name="new_pass1">
                                     <?= form_error('new_pass1', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group">

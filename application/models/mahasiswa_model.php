@@ -58,6 +58,16 @@ class Mahasiswa_model extends CI_Model{
 		$this->db->update('users', $data);
 	}
 
+	public function getdatatableby($table, $by, $userid)
+    {
+        return $this->db->get_where($table, [$by => $userid])->row_array();
+    }
+	
+    public function update($table, $data, $where)
+    {
+        return $this->db->update($table, $data, $where);
+    }
+
 	public function ambil_id_mahasiswa($id)
 	{
 		// $hasil = $this->db->where('id',$id)->('mahasiswa');
