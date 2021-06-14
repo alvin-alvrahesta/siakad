@@ -14,7 +14,8 @@ class Mahasiswa extends CI_Controller{
 		$data = array(
 			'mhs'=>$this->mahasiswa_model->tampil_data($userid),
 			'makul'=>$this->mahasiswa_model->makul(),
-			'title'=>'Mahasiswa'
+			'title'=>'Mahasiswa',
+			'userid'=>$userid
 		);
 
 		$this->load->view('wrapper/header',$data);

@@ -32,8 +32,7 @@
 		<?php
 
 		$no=1;
-		foreach($mhs as $data) : ?>
-
+		foreach($mhs as $data) : if (!$data->nama_makul){break;}?>
 			<tr>
 				<td><?= $no++ ?></td>
 				<td><?= $data->nama_makul ?></td>
@@ -58,9 +57,9 @@
 				<div class="modal-body">
 					
 					<form id="myForm" action="<?php echo site_url('mahasiswa/mahasiswa/insert_makul') ?>" method="post" enctype="multipart/form-data">
-					<div class="form-group">
-							<input type="text" class="form-control" id="nim" name="nim" placeholder="<?= $data->nim ?>" value="<?= $data->nim ?>" readonly>
-						</div> 
+
+					<input type="hidden" class="form-control" id="nim" name="nim" value="<?= $userid ?>" readonly>
+
 					<div class="form-group">
 							<label>Pilih Mata Kuliah yang Ingin Diambil</label>
 							<select name="matakuliah" class="form-control" required>
@@ -80,7 +79,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!-- Modal Hapus Makul -->
 	<?php foreach ($mhs as $data) :?>
 	<div class="modal fade" id="ModalHapus<?= $data->id_mhs; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
