@@ -26,17 +26,17 @@
 
 			<!-- Nav Item - Charts -->
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/dashboard/editprofil">
+				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/editprofil">
 					<i class="fas fa-users"></i>
 					<span>Edit Profil</span></a>
 			</li>
 
 			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/dashboard/pilihmatkul">
+			<!-- <li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/pilihmakul">
 					<i class="fas fa-tasks"></i>
 					<span>Pilih Mata Kuliah</span></a>
-			</li>
+			</li> -->
 
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">

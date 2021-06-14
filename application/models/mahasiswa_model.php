@@ -12,6 +12,30 @@ class Mahasiswa_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+	public function makul()
+	{
+		$this->db->select('*');
+		$this->db->from('matakuliah');
+		return $this->db->get()->result();
+	}
+
+	public function insert_makul($data)
+	{
+		$this->db->insert('mahasiswa', $data);
+	}
+
+	public function update_makul($data)
+	{
+		$this->db->where('id_mhs', $data['id_mhs']);
+		$this->db->update('mahasiswa', $data);
+	}
+
+	public function delete_makul($data)
+	{
+		$this->db->where('id_mhs', $data['id_mhs']);
+		$this->db->delete('mahasiswa', $data);
+	}
+
 	public function ambil_id_mahasiswa($id)
 	{
 		// $hasil = $this->db->where('id',$id)->('mahasiswa');

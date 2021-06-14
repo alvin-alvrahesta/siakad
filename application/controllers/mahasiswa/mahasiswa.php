@@ -14,13 +14,55 @@ class Mahasiswa extends CI_Controller{
 		//$data['mahasiswa'] = $this->mahasiswa_model->tampil_data('mahasiswa')->result();
 		//$data['prodi'] = $this->prodi_model->tampil_data('profiler_no_db')->result();
 		$data = array(
-			'mhs'=>$this->mahasiswa_model->tampil_data($username)
+			'mhs'=>$this->mahasiswa_model->tampil_data($username),
+			'makul'=>$this->mahasiswa_model->makul(),
+			'title'=>'Mahasiswa'
 			);
 
-		$this->load->view('wrapper/header');
+		$this->load->view('wrapper/header',$data);
 		$this->load->view('wrapper/mahasiswa_sidebar');
 		$this->load->view('mahasiswa/mahasiswa',$data,FALSE);//$this->load->view('mahasiswa/mahasiswa', $data);
 		$this->load->view('wrapper/footer');
+	}
+
+	public function insert_makul()
+	{
+		$this->form_validation->set_rules('matakuliah', 'Mata Kuliah', 'is_unique[mahasiswa.matakuliah]');
+		if ($this->form_validation->run()==TRUE) {
+			$data = array(
+				'nim'			=>$this->input->post('nim'),
+				'matakuliah'	=>$this->input->post('matakuliah')
+				);
+			
+			$this->mahasiswa_model->insert_makul($data);
+			$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Ditambahkan');
+			redirect('mahasiswa/mahasiswa');
+		}
+		else {
+			redirect('mahasiswa/mahasiswa');
+		}
+		
+	}
+
+	public function update_makul($id_mhs)
+	{
+		$data = array(
+			'id_mhs'		=>$id_mhs,
+			'nim'			=>$this->input->post('nim'),
+			'matakuliah'	=>$this->input->post('matakuliah'),
+			);
+		
+			$this->mahasiswa_model->update_makul($data);
+			$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Diupdate');
+			redirect('mahasiswa/mahasiswa');
+	}
+
+	public function delete_makul($id_mhs)
+	{
+		$data=array('id_mhs'=>$id_mhs);
+		$this->mahasiswa_model->delete_makul($data);
+		$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Dihapus');
+		redirect('mahasiswa/mahasiswa');
 	}
 
 	public function detail($id)
@@ -34,11 +76,11 @@ class Mahasiswa extends CI_Controller{
 
 	public function tambah_mahasiswa()
 	{
-		$data['prodi'] = $this->mahasiswa_model->tampil_data('prodi')->result();
-		$this->load->view('templates_administrator/header');
-		$this->load->view('templates_administrator/sidebar');
-		$this->load->view('administrator/mahasiswa_form',$data);
-		$this->load->view('templates_administrator/footer');
+		// $data['prodi'] = $this->mahasiswa_model->tampil_data('prodi')->result();
+		$this->load->view('wrapper/header',$data);
+		$this->load->view('wrapper/mahasiswa_sidebar');
+		$this->load->view('mahasiswa/tambah_mhs');//$this->load->view('mahasiswa/mahasiswa', $data);
+		$this->load->view('wrapper/footer');
 	}
 
 	public function tambah_mahasiswa_aksi()
