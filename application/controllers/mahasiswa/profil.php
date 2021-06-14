@@ -43,7 +43,7 @@ class Profil extends CI_Controller {
 		$data = array(
 			'id'		=>$id,
 			'username'	=>$this->input->post('username'),
-			'userid'	=>$this->input->post('userid'),
+			// 'userid'	=>$this->input->post('userid'),
 		);
 		
 		$this->mahasiswa_model->update_profil($data);
