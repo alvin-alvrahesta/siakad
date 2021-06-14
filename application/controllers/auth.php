@@ -49,7 +49,7 @@ class Auth extends CI_Controller {
 			redirect('administrator/dashboard');
 		} 
 		if ($user['userrole'] == 2) {
-			redirect('dosen/dosen');
+			redirect('dosen/dashboard');
 		} 
 		if ($user['userrole'] == 4) {
 			redirect('mahasiswa/mahasiswa');

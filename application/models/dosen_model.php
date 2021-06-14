@@ -1,22 +1,25 @@
 <?php
 
 class Dosen_model extends CI_Model{
-	/*public $table = 'dosen';
-	public $id = 'id_dosen';
-	public $order = 'DESC';
 
-	public function tampil_data($table)
+	public function tampil_data($username)
 	{
-		return $this->db->get($table);
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->join('dosen', 'dosen.nrp = users.userid', 'left');
+		$this->db->join('matakuliah', 'matakuliah.id_makul = dosen.id_makul', 'left');
+		$this->db->where('username', $username);
+		return $this->db->get()->result();
 	}
+
+    public function getAll($table)
+    {
+        return $this->db->get($table);
+    }
+
 	public function ambil_id_dosen($id)
 	{
-		$hasil = $this->db->where('id',$id)->get('dosen');
-		if($hasil->num_rows() > 0){
-			return $hasil->result();
-		}else{
-			return false;
-		}
+
 	}
 
 	public function insert_data($data,$table)
@@ -34,5 +37,6 @@ class Dosen_model extends CI_Model{
 	{
 		$this->db->where($where);
 		$this->db->update($table);
-	}*/
+	}
+	
 }
