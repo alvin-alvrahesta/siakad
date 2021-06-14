@@ -57,21 +57,21 @@ class Dashboard extends CI_Controller
         }
 
         $data['title'] = 'Pilih Matakuliah';
-        
+
         $u = $this->Admin_model->getdatatableby('users', 'id', $id);
         $role = $u['userrole'];
         $uid = $u['userid'];
         if ($role == 2) {
-            $u2 = $this->Admin_model->getdatatableby('dosen', 'nrp', $uid);
+            $u2 = $this->Admin_model->getresultdatatableby('dosen', 'nrp', $uid);
         }
         if ($role == 4) {
-            $u2 = $this->Admin_model->getdatatableby('mahasiswa', 'nim', $uid);
+            $u2 = $this->Admin_model->getresultdatatableby('mahasiswa', 'nim', $uid);
         }
         $data['user'] = $u2;
-        
+        $data['role'] = $role;
         $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
-        $this->load->view('administrator/ampu_makul');
+        $this->load->view('administrator/ampu_makul', $data);
         $this->load->view('wrapper/footer');
     }
 
@@ -303,5 +303,4 @@ class Dashboard extends CI_Controller
         $this->Admin_model->Update('users', $data, array('id' => $this->input->post('id')));
         redirect(base_url('administrator/dashboard/profile'), 'refresh');
     }
-    
 }
