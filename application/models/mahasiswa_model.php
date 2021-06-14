@@ -2,13 +2,13 @@
 
 class Mahasiswa_model extends CI_Model{
 
-	public function tampil_data($username)
+	public function tampil_data($userid)
 	{
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->join('mahasiswa', 'mahasiswa.nim = users.userid', 'left');
 		$this->db->join('matakuliah', 'matakuliah.id_makul = mahasiswa.matakuliah', 'left');
-		$this->db->where('username', $username);
+		$this->db->where('userid', $userid);
 		return $this->db->get()->result();
 	}
 
@@ -41,7 +41,21 @@ class Mahasiswa_model extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->where('userid', $userid);
-		return $this->db->get()->result();
+		return $this->db->get()->first_row();
+	}
+
+	public function edit_profil($userid)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('userid', $userid);
+		return $this->db->get()->first_row();
+	}
+
+	public function update_profil($data)
+	{
+		$this->db->where('id', $data['id']);
+		$this->db->update('users', $data);
 	}
 
 	public function ambil_id_mahasiswa($id)

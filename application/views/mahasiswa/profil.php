@@ -1,20 +1,48 @@
+<!-- Begin Page Content -->
 <div class="container-fluid">
-	<h1>Profil MHS checkk</h1>
-	<table class="table table-striped table-hover">
-					<tr>
-						<th width="170px">NIM</th>
-						<th width="20px">:</th>
-						<th> <?=$profil->userpass; ?> </th>
-					</tr>
-					<tr>
-						<th width="170px">Nama Mahasiswa</th>
-						<th width="20px">:</th>
-						<td> <?=$profil->username; ?> </td>
-					</tr>
-					<tr>
-						<th width="170px">Beban Mata Kuliah</th>
-						<th width="20px">:</th>
-						<!-- <td> <?= $this->db->from("mahasiswa")->where("nim",$profil->userid)->count_all_results() ?> </td> -->
-					</tr>
-			</table>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="<?= base_url('mahasiswa/mahasiswa') ?>">Dashboard</a>
+	</li>
+	<li class="breadcrumb-item active">My Profil</li>
+</ol>
+
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-gray-800"><?= $title;  ?></h1>
+
+<div class="row">
+	<div class="col-lg-8">
+		<?= $this->session->flashdata('message'); ?>
+	</div>
+</div>
+
+<div class="card mb-3" style="max-width: 540px;">
+
+	<div class="row no-gutters">
+
+		<div class="col-md-8">
+			<div class="card-body">
+				<h5 class="card-title font-weight-bold text-primary"><?= $profil->username ?></h5>
+				<p class="card-text"><?= $profil->userid ?></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card mb-4 py-3 border-left-secondary " style="max-width: 540px;">
+	<div class="card-body">
+		<div>
+			<a href="<?php echo base_url("mahasiswa/profil/editprofil") ?>" class="small-box-footer">Edit Profil <i class="fas fa-arrow-circle-right"></i></a>
+		</div>
+	</div>
+</div>
+
+<div class="card mb-4 py-3 border-left-secondary" style="max-width: 540px;">
+	<div class="card-body">
+		<div>
+			<a href="<?php echo base_url("mahasiswa/mahasiswa/changepassword") ?>" class="small-box-footer">Ganti Password <i class="fas fa-arrow-circle-right"></i></a>
+		</div>
+	</div>
 </div>

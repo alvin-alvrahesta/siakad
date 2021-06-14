@@ -10,18 +10,16 @@ class Mahasiswa extends CI_Controller{
 
 	public function index()
 	{
-		$username=$this->session->userdata('username');
-		//$data['mahasiswa'] = $this->mahasiswa_model->tampil_data('mahasiswa')->result();
-		//$data['prodi'] = $this->prodi_model->tampil_data('profiler_no_db')->result();
+		$userid=$this->session->userdata('userid');
 		$data = array(
-			'mhs'=>$this->mahasiswa_model->tampil_data($username),
+			'mhs'=>$this->mahasiswa_model->tampil_data($userid),
 			'makul'=>$this->mahasiswa_model->makul(),
 			'title'=>'Mahasiswa'
-			);
+		);
 
 		$this->load->view('wrapper/header',$data);
 		$this->load->view('wrapper/mahasiswa_sidebar');
-		$this->load->view('mahasiswa/mahasiswa',$data,FALSE);//$this->load->view('mahasiswa/mahasiswa', $data);
+		$this->load->view('mahasiswa/mahasiswa',$data,FALSE);
 		$this->load->view('wrapper/footer');
 	}
 
@@ -50,11 +48,11 @@ class Mahasiswa extends CI_Controller{
 			'id_mhs'		=>$id_mhs,
 			'nim'			=>$this->input->post('nim'),
 			'matakuliah'	=>$this->input->post('matakuliah'),
-			);
+		);
 		
-			$this->mahasiswa_model->update_makul($data);
-			$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Diupdate');
-			redirect('mahasiswa/mahasiswa');
+		$this->mahasiswa_model->update_makul($data);
+		$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Diupdate');
+		redirect('mahasiswa/mahasiswa');
 	}
 
 	public function delete_makul($id_mhs)
