@@ -36,6 +36,14 @@ class Mahasiswa_model extends CI_Model{
 		$this->db->delete('mahasiswa', $data);
 	}
 
+	public function tampil_profil($userid)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('userid', $userid);
+		return $this->db->get()->result();
+	}
+
 	public function ambil_id_mahasiswa($id)
 	{
 		// $hasil = $this->db->where('id',$id)->('mahasiswa');

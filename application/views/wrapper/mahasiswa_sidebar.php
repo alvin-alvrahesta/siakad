@@ -26,9 +26,9 @@
 
 			<!-- Nav Item - Charts -->
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/editprofil">
+				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/profil">
 					<i class="fas fa-users"></i>
-					<span>Edit Profil</span></a>
+					<span>Profil</span></a>
 			</li>
 
 			<!-- Nav Item - Tables -->
