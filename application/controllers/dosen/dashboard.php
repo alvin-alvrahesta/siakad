@@ -49,4 +49,30 @@ class Dashboard extends CI_Controller
         redirect(base_url('dosen/dashboard/dosenview'), 'refresh');
     }
 
+    public function update_makul()
+    {
+
+        $id_makul = $this->input->post('id_makul');
+
+        $data = array(
+            'id_makul' => $id_makul
+        );
+        $this->Dosen_model->update_data('dosen', $data, array('id' => $this->input->post('id')));
+        redirect(base_url('dosen/dashboard/dosenview'), 'refresh');
+    }
+
+    public function delete_makul($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        $u = $this->Dosen_model->getdatatableby('dosen', 'id', $id);
+
+        $mid = $u['id'];
+        $this->Dosen_model->delete_data('dosen', array("id" => $mid));
+        redirect(base_url('dosen/dashboard/dosenview'));
+    }
+
+
 }

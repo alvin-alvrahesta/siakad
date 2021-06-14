@@ -12,31 +12,29 @@ class Dosen_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+    public function getdatatableby($table, $by, $id)
+    {
+        return $this->db->get_where($table, [$by => $id])->row_array();
+    }
+
     public function getAll($table)
     {
         return $this->db->get($table);
     }
 
-	public function ambil_id_dosen($id)
-	{
+    public function insert_data($table, $data)
+    {
+        return $this->db->insert($table, $data);
+    }
 
-	}
+    public function update_data($table, $data, $where)
+    {
+		$this->db->update($table, $data, $where);
+    }
 
-	public function insert_data($data,$table)
-	{
-		$this->db->insert($table,$data);
-	}
-
-	public function update_data($where,$data,$table)
-	{
-		$this->db->where($where);
-		$this->db->update($table,$data);
-	}
-
-	public function hapus_data($where,$table)
-	{
-		$this->db->where($where);
-		$this->db->update($table);
-	}
+    public function delete_data($table, $where)
+    {
+        $this->db->delete($table, $where);
+    }
 	
 }
