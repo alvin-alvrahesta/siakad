@@ -29,8 +29,9 @@ class Dashboard extends CI_Controller
 		$data = array(
 			'dosen'=>$this->Dosen_model->tampil_data($username),
 			'makuls'=>$this->Admin_model->getAll('matakuliah')->result(),
+			'title'=>'Mata Kuliah'
 			);
-		$this->load->view('wrapper/header');
+		$this->load->view('wrapper/header',$data);
 		$this->load->view('wrapper/dosen_sidebar');
 		$this->load->view('dosen/dosenview',$data,FALSE);
 		$this->load->view('wrapper/footer');
@@ -43,8 +44,9 @@ class Dashboard extends CI_Controller
 		$data = array(
 			'dosen'=>$this->Dosen_model->tampil_data($username),
 			'makuls'=>$this->Admin_model->getAll('matakuliah')->result(),
+			'title'=>'Input Nilai'
 			);
-		$this->load->view('wrapper/header');
+		$this->load->view('wrapper/header',$data);
 		$this->load->view('wrapper/dosen_sidebar');
 		$this->load->view('dosen/inputnilaiview',$data,FALSE);
 		$this->load->view('wrapper/footer');

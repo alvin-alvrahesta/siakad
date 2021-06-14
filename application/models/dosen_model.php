@@ -12,9 +12,36 @@ class Dosen_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+	public function tampil_profil($userid)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('userid', $userid);
+		return $this->db->get()->first_row();
+	}
+
+	public function edit_profil($userid)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('userid', $userid);
+		return $this->db->get()->first_row();
+	}
+
+	public function update_profil($data)
+	{
+		$this->db->where('id', $data['id']);
+		$this->db->update('users', $data);
+	}
+
     public function getdatatableby($table, $by, $id)
     {
         return $this->db->get_where($table, [$by => $id])->row_array();
+    }
+	
+    public function update($table, $data, $where)
+    {
+        return $this->db->update($table, $data, $where);
     }
 
     public function getAll($table)
