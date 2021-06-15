@@ -31,8 +31,8 @@
                                     <td><?= $u->userid; ?></td>
                                     <td>
                                         <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $u->id; ?>"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $u->id; ?>"><i class="fas fa-trash"></i></button>
                                         <a href="<?php echo site_url('administrator/dashboard/detailmakulview/' . $u->id); ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $u->id; ?>"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                         <?php }
@@ -68,8 +68,8 @@
                                     <td><?= $u->userid; ?></td>
                                     <td>
                                         <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $u->id; ?>"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $u->id; ?>"><i class="fas fa-trash"></i></button>
                                         <a href="<?php echo site_url('administrator/dashboard/detailmakulview/' . $u->id); ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $u->id; ?>"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                         <?php }

@@ -61,18 +61,18 @@
                                                                     } ?>
                                 <td>
                                     <!-- <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $data->id; ?>"><i class="fas fa-edit"></i></button> -->
-                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="<?php if ($role == 2) {
-                                                                                                                echo '#deletepmakulmodal' . $data->id;
-                                                                                                            }
-                                                                                                            if ($role == 4) {
-                                                                                                                echo '#deletepmakulmodal' . $data->id_mhs;
-                                                                                                            } ?>"><i class="fas fa-trash"></i></button>
                                     <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target=" <?php if ($role == 2) {
                                                                                                                     echo '#editpmakulmodal' . $data->id;
                                                                                                                 }
                                                                                                                 if ($role == 4) {
                                                                                                                     echo '#editpmakulmodal' . $data->id_mhs;
                                                                                                                 } ?>"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="<?php if ($role == 2) {
+                                                                                                                echo '#deletepmakulmodal' . $data->id;
+                                                                                                            }
+                                                                                                            if ($role == 4) {
+                                                                                                                echo '#deletepmakulmodal' . $data->id_mhs;
+                                                                                                            } ?>"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         <?php }; ?>
@@ -169,13 +169,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="myForm" action="<?php echo site_url('administrator/dashboard/edit_pmakul') ?>" method="post" enctype="multipart/form-data">
-
-                        <div class="form-group">
-                            <label>Masukan Nilai</label>
-                            <input type="text" class="form-control" id="editpmakul" name="editpmakul" value="<?php echo $data->nilai; ?>">
-
-                        </div>
+                    <form id="myForm" action="<?php echo site_url('administrator/dashboard/update_pmakul') ?>" method="post" enctype="multipart/form-data">
                         <input readonly type="hidden" class="form-control" id="userid" name="userid" value="<?php if ($role == 2) {
                                                                                                                 echo $userid;
                                                                                                             }
@@ -183,7 +177,11 @@
                                                                                                                 echo $userid;
                                                                                                             } ?>">
                         <input readonly type="hidden" class="form-control" id="userrole" name="userrole" value="<?php echo $role ?>">
-
+                        <input readonly type="hidden" class="form-control" id="id_makul" name="id_makul" value="<?php echo $data->id_makul ?>">
+                        <div class="form-group">
+                            <label>Masukan Nilai</label>
+                            <input type="text" class="form-control" id="nilai" name="nilai" value="<?php echo $data->nilai; ?>">
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>

@@ -55,22 +55,28 @@ class Dashboard extends CI_Controller
         if (!isset($id)) {
             show_404();
         }
-
         $data['title'] = 'Pilih Matakuliah';
-
         $u = $this->Admin_model->getdatatableby('users', 'id', $id);
         $role = $u['userrole'];
         $uid = $u['userid'];
+        $where_uid = null;
+        $where_table = null;
         if ($role == 2) {
-            $u2 = $this->Admin_model->getresultdatatableby('dosen', 'nrp', $uid);
-            $data['userid'] = $u2['0']->nrp;
-            echo $data['userid'];
+            $where_table = 'dosen';
+            $where_uid = 'nrp';
+            //$data['userid'] = $u2['0']->nrp;
+            /*if (!empty($playerlist)) {
+                $data['userid'] = $u2['0']->nrp;
+            }
+            echo $data['userid'];*/
         }
         if ($role == 4) {
-            $u2 = $this->Admin_model->getresultdatatableby('mahasiswa', 'nim', $uid);
-            $data['userid'] = $u2['0']->nim;
-            echo $data['userid'];
+            $where_table = 'mahasiswa';
+            $where_uid = 'nim';
         }
+        $u2 = $this->Admin_model->getresultdatatableby($where_table, $where_uid, $uid);
+        $data['userid'] = $uid;
+        echo $data['userid'];
         $data['user'] = $u2;
         $data['role'] = $role;
         $makul = $this->Admin_model->getAll('matakuliah')->result();
@@ -277,6 +283,9 @@ class Dashboard extends CI_Controller
         $userid = $this->input->post('userid');
         $id_makul = $this->input->post('id_makul');
         $userrole = $this->input->post('userrole');
+        if (!isset($id_makul) || !isset($userid) || !isset($userrole)) {
+            show_404();
+        }
         $data = null;
         $role = null;
         $uid = null;
@@ -303,12 +312,29 @@ class Dashboard extends CI_Controller
         redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
     }
 
+    public function update_pmakul()
+    {
+        $userrole = $this->input->post('userrole');
+        $userid = $this->input->post('userid');
+        $id_makul =  $this->input->post('id_makul');
+        if (!isset($id_makul) || !isset($userid) || !isset($userrole) || $userrole != 4) {
+            show_404();
+        }
+        $nilai = $this->input->post('nilai');
+        $data = array(
+            'nilai' => $nilai
+        );
+        $id = $this->Admin_model->getuserid($userid);
+        $this->Admin_model->update('mahasiswa', $data, "nim = '$userid' AND id_makul = '$id_makul'");
+        redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
+    }
+
     public function delete_pmakul()
     {
         $userrole = $this->uri->segment(4);
         $userid =  $this->uri->segment(5);
         $id_makul =  $this->uri->segment(6);
-        if (!isset($id_makul) || !isset($userid)) {
+        if (!isset($id_makul) || !isset($userid) || !isset($userrole)) {
             show_404();
         }
         if ($userrole == 2) {
