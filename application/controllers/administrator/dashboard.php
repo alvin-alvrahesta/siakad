@@ -296,7 +296,7 @@ class Dashboard extends CI_Controller
         ];*/
         $mid = $u['id_makul'];
         $this->Admin_model->Delete('dosen', array("id_makul" => $mid));
-        $this->Admin_model->Delete('mahasiswa', array("matakuliah" => $mid));
+        $this->Admin_model->Delete('mahasiswa', array("id_makul" => $mid));
         $this->Admin_model->Delete('matakuliah', array("id_makul" => $mid));
         redirect(base_url('administrator/dashboard/makulview'));
     }
