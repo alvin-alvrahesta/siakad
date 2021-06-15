@@ -22,6 +22,7 @@ class Auth extends CI_Controller {
 			$data['title'] = 'Halaman Login';
 			$this->load->view('wrapper/header', $data);
 			$this->load->view('auth/login');
+			$this->load->view('wrapper/footer');
 		}else{
             $this->doLogin();
         }

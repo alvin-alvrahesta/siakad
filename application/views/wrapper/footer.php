@@ -15,6 +15,15 @@
 <script src=" <?php echo base_url() ?>assets/js/demo/chart-area-demo.js"></script>
 <script src="<?php echo base_url() ?>assets/js/demo/chart-pie-demo.js"></script>
 
+<!-- Auto fading alert -->
+<script type="text/javascript">
+	window.setTimeout(function(){
+		$('.alert').fadeTo(500,0).slideUp(500, function(){
+			$(this).remove();
+		});
+	}, 5000);
+</script>
+
 </body>
 
 </html>

@@ -43,11 +43,12 @@ class Profil extends CI_Controller {
 		$data = array(
 			'id'		=>$id,
 			'username'	=>$this->input->post('username'),
-			// 'userid'	=>$this->input->post('userid'),
 		);
 		
 		$this->mahasiswa_model->update_profil($data);
-		$this->session->set_flashdata('pesan', 'Profil Berhasil Diupdate');
+		$this->session->set_flashdata('messageprofil', '<div class="row">
+		<div class="col-12"><div class="alert alert-success alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Profil berhasil diupdate!</div></div></div>');
 		redirect('mahasiswa/profil');
 	}
 

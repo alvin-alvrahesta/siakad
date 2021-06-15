@@ -14,7 +14,7 @@
 
 <div class="row">
 	<div class="col-lg-8">
-		<?= $this->session->flashdata('message'); ?>
+		<?= $this->session->flashdata('messageprofil'); ?>
 	</div>
 </div>
 

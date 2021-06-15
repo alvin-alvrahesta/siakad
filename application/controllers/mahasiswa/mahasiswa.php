@@ -28,39 +28,54 @@ class Mahasiswa extends CI_Controller{
 	{
 		$this->form_validation->set_rules('matakuliah', 'Mata Kuliah', 'is_unique[mahasiswa.matakuliah]');
 		if ($this->form_validation->run()==TRUE) {
+			if(isset($_SESSION['pesanmhs2'])){
+				unset($_SESSION['pesanmhs2']);
+			}
+
 			$data = array(
 				'nim'			=>$this->input->post('nim'),
 				'matakuliah'	=>$this->input->post('matakuliah')
-				);
+			);
 			
 			$this->mahasiswa_model->insert_makul($data);
-			$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Ditambahkan');
+			$this->session->set_flashdata('pesanmhs', 'Mata Kuliah Berhasil Ditambahkan');
 			redirect('mahasiswa/mahasiswa');
 		}
 		else {
+			if(isset($_SESSION['pesanmhs'])){
+				unset($_SESSION['pesanmhs']);
+			}
+			$this->session->set_flashdata('pesanmhs2', 'Mata Kuliah Sudah Diambil');
 			redirect('mahasiswa/mahasiswa');
 		}
 		
 	}
 
 	public function delete_makul($id_mhs)
-	{
+	{		
+		if(isset($_SESSION['pesanmhs'])){
+			unset($_SESSION['pesanmhs']);
+		}
+		if(isset($_SESSION['pesanmhs2'])){
+			unset($_SESSION['pesanmhs2']);
+		}
+
 		$data=array('id_mhs'=>$id_mhs);
 		$this->mahasiswa_model->delete_makul($data);
-		$this->session->set_flashdata('pesan', 'Mata Kuliah Berhasil Dihapus');
+		$this->session->set_flashdata('pesanmhs', 'Mata Kuliah Berhasil Dihapus');
 		redirect('mahasiswa/mahasiswa');
 	}
 
-	public function _rules()
-	{
-		$this->form_Validation->set_rules('nim','Nim','required',['required' => 'NIM wajib diisi']);
-		$this->form_Validation->set_rules('nama_lengkap','Nama Lengkap','required',['required' => 'Nama Lengkap wajib diisi']);
-		$this->form_Validation->set_rules('alamat','Alamat','required',['required' => 'Alamat wajib diisi']);
-		$this->form_Validation->set_rules('email','Email','required',['required' => 'Email wajib diisi']);
-		$this->form_Validation->set_rules('telepon','Telepon','required',['required' => 'Nomor Telepon wajib diisi']);
-		$this->form_Validation->set_rules('tempat_lahir','Tempat Lahir','required',['required' => 'Tempat Lahir wajib diisi']);
-		$this->form_Validation->set_rules('tanggal_lahir','Tanggal Lahir','required',['required' => 'Tanggal Lahir wajib diisi']);
-		$this->form_Validation->set_rules('jenis_kelamin','Jenis Kelamin','required',['required' => 'Jenis Kelamin wajib diisi']);
-		$this->form_Validation->set_rules('nama-prodi','Nama Prodi','required',['required' => 'Nama Prodi wajib diisi']);
-	}
+	// public function _rules()
+	// {
+	// 	$this->form_Validation->set_rules('nim','Nim','required',['required' => 'NIM wajib diisi']);
+	// 	$this->form_Validation->set_rules('nama_lengkap','Nama Lengkap','required',['required' => 'Nama Lengkap wajib diisi']);
+	// 	$this->form_Validation->set_rules('alamat','Alamat','required',['required' => 'Alamat wajib diisi']);
+	// 	$this->form_Validation->set_rules('email','Email','required',['required' => 'Email wajib diisi']);
+	// 	$this->form_Validation->set_rules('telepon','Telepon','required',['required' => 'Nomor Telepon wajib diisi']);
+	// 	$this->form_Validation->set_rules('tempat_lahir','Tempat Lahir','required',['required' => 'Tempat Lahir wajib diisi']);
+	// 	$this->form_Validation->set_rules('tanggal_lahir','Tanggal Lahir','required',['required' => 'Tanggal Lahir wajib diisi']);
+	// 	$this->form_Validation->set_rules('jenis_kelamin','Jenis Kelamin','required',['required' => 'Jenis Kelamin wajib diisi']);
+	// 	$this->form_Validation->set_rules('nama-prodi','Nama Prodi','required',['required' => 'Nama Prodi wajib diisi']);
+	// }
 }

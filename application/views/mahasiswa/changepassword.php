@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-lg-6">
 
-                            <?= $this->session->flashdata('message'); ?>
+                            <?= $this->session->flashdata('messagepass'); ?>
 
                             <form action="<?= base_url('mahasiswa/changepassword/updatepassword') ?>" method="post">
                                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $profil->id ?>">

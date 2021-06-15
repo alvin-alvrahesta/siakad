@@ -1,16 +1,28 @@
 <div class="container-fluid">
 
 
-	<div class="alert alert-success" role="alert">
+	<!-- <div class="alert alert-success" role="alert">
 		<i class="fas fa-university"></i> Mahasiswa
+	</div> -->
+	<div class="card mb-4 border-left-primary">
+		<div class="card-body">
+			<i class="fas fa-university fa-fw"></i>Mahasiswa
+		</div>
 	</div>
 
 	<?php
-		if ($this->session->flashdata('pesan')) {
+		if ($this->session->flashdata('pesanmhs')) {
 			echo '<div class="alert alert-success alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-			echo $this->session->flashdata('pesan');
+			echo $this->session->flashdata('pesanmhs');
 			echo '</div>';	
+		}
+		
+		if ($this->session->flashdata('pesanmhs2')) {
+			echo '<div class="alert alert-warning alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+			echo $this->session->flashdata('pesanmhs2');
+			echo '</div>';
 		}	
 			// echo validation_errors('<div class="alert alert-danger alert-dismissible">
 			// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>','</div>');
