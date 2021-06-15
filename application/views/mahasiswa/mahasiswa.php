@@ -74,13 +74,13 @@
 
 					<div class="form-group">
 							<label>Pilih Mata Kuliah yang Ingin Diambil</label>
-							<select name="matakuliah" class="form-control" required>
+							<select name="id_makul" class="form-control" required>
 							<option value="">-- Pilih Program Studi --</option>
 							<?php foreach($makul as $data) : ?>
 							<option value="<?php echo $data->id_makul ?>"><?php echo $data->nama_makul ?></option>
 							<?php endforeach; ?>
 							</select>
-						<?php echo form_error('matakuliah','div class="text-danger small ml-3">','</div>') ?>
+						<?php echo form_error('id_makul','div class="text-danger small ml-3">','</div>') ?>
 						</div>
 				</div>
 				<div class="modal-footer">

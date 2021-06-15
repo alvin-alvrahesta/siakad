@@ -26,7 +26,7 @@ class Mahasiswa extends CI_Controller{
 
 	public function insert_makul()
 	{
-		$this->form_validation->set_rules('matakuliah', 'Mata Kuliah', 'is_unique[mahasiswa.matakuliah]');
+		$this->form_validation->set_rules('matakuliah', 'Mata Kuliah', 'is_unique[mahasiswa.id_makul]');
 		if ($this->form_validation->run()==TRUE) {
 			if(isset($_SESSION['pesanmhs2'])){
 				unset($_SESSION['pesanmhs2']);
@@ -34,7 +34,7 @@ class Mahasiswa extends CI_Controller{
 
 			$data = array(
 				'nim'			=>$this->input->post('nim'),
-				'matakuliah'	=>$this->input->post('matakuliah')
+				'id_makul'	=>$this->input->post('id_makul')
 			);
 			
 			$this->mahasiswa_model->insert_makul($data);

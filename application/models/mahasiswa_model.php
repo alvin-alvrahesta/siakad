@@ -7,7 +7,7 @@ class Mahasiswa_model extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->join('mahasiswa', 'mahasiswa.nim = users.userid', 'left');
-		$this->db->join('matakuliah', 'matakuliah.id_makul = mahasiswa.matakuliah', 'left');
+		$this->db->join('matakuliah', 'matakuliah.id_makul = mahasiswa.id_makul', 'left');
 		$this->db->where('userid', $userid);
 		return $this->db->get()->result();
 	}

@@ -2,13 +2,13 @@
 
 class Dosen_model extends CI_Model{
 
-	public function tampil_data($username)
+	public function tampil_data($userid)
 	{
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->join('dosen', 'dosen.nrp = users.userid', 'left');
 		$this->db->join('matakuliah', 'matakuliah.id_makul = dosen.id_makul', 'left');
-		$this->db->where('username', $username);
+		$this->db->where('userid', $userid);
 		return $this->db->get()->result();
 	}
 
@@ -34,6 +34,11 @@ class Dosen_model extends CI_Model{
 		$this->db->update('users', $data);
 	}
 
+	public function getuserid($userid)
+    {
+        return $this->db->get_where('users', ['userid' => $userid])->row_array();
+    }
+
     public function getdatatableby($table, $by, $id)
     {
         return $this->db->get_where($table, [$by => $id])->row_array();
@@ -48,6 +53,11 @@ class Dosen_model extends CI_Model{
     {
         return $this->db->get($table);
     }
+
+	public function insert_makul($data)
+	{
+		$this->db->insert('dosen', $data);
+	}
 
     public function insert_data($table, $data)
     {

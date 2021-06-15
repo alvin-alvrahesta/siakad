@@ -19,6 +19,6 @@
     <link href=" <?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 	<!-- Favicon -->
-	<link rel="icon" href="<?=base_url()?>assets/img/logoujb8.png" type="image/gif">
+	<link rel="icon" href="<?=base_url()?>assets/img/logoujbv.svg" type="image/gif">
 
 </head>
