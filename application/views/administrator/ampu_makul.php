@@ -27,6 +27,9 @@
                                 if ($role == 4) {
                                     echo "Mata Kuliah Yang Dipilih";
                                 } ?></th>
+                            <?php if ($role == 4) {
+                                    ?><th>Nilai</th><?php
+                                } ?>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -53,6 +56,9 @@
                                     }
                                 }
                                 ?></td>
+                                <?php if ($role == 4) {
+                                    ?><td><?php echo $data->nilai ?></td><?php
+                                } ?>
                                 <td>
                                     <!-- <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $data->id; ?>"><i class="fas fa-edit"></i></button> -->
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="<?php if ($role == 2) {
