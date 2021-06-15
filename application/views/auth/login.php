@@ -1,4 +1,6 @@
-<body class="bg-gradient-primary">
+<body class="bg-img-cover"
+	style="background-image: url('<?= base_url('assets/img/JembatanUBJ.jpg') ?>'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover; "
+	>
 
     <div class="container">
 
@@ -15,7 +17,7 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
 									<div class="text-center">
-                                        <img src="<?php echo base_url() ?>assets/img/logoujb24.png">
+                                        <img src="<?php echo base_url() ?>assets/img/logoujbv.svg" height="120" width="120">
                                     </div>
                                     <div class="text-center">
 										<br><h1 class="h4 text-gray-900 mb-4">Sistem Informasi Akademik</h1>

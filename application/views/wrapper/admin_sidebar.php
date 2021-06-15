@@ -9,7 +9,10 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <i class="fa fa-university" aria-hidden="true"></i>
+					<i class="fa" aria-hidden="true">
+						<img src="<?= base_url('assets/img/logoujbwhite.svg') ?>" alt="" height="50" width="50">
+					</i>
+                    <!-- <i class="fa fa-university" aria-hidden="true"></i> -->
                 </div>
                 <div class="sidebar-brand-text mx-3">SIAKAD</div>
             </a>
@@ -69,6 +72,10 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+					
+					<a class="navbar-brand">
+							<span class="d-inline-block align-center text-gray-600" > UNIVERSITAS JURANG BELIMBING </span>
+					</a>
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-1 my-2 my-md-0 mw-100 ">
