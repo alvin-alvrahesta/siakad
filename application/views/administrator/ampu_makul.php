@@ -35,9 +35,17 @@
                         <?php foreach ($user as $data) { ?>
                             <tr>
                                 <td><?php foreach ($makuls as $mkl){
-                                    if($data->id_makul == $mkl->id_makul){
-                                        echo $mkl->nama_makul;
-                                        break;
+                                    if($role == 2){
+                                        if($data->id_makul == $mkl->id_makul){
+                                            echo $mkl->nama_makul;
+                                            break;
+                                        }
+                                    }
+                                    if($role == 4){
+                                        if($data->matakuliah == $mkl->id_makul){
+                                            echo $mkl->nama_makul;
+                                            break;
+                                        }
                                     }
                                 }
                                 ?></td>
