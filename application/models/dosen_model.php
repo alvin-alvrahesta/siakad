@@ -39,10 +39,19 @@ class Dosen_model extends CI_Model{
         return $this->db->get_where('users', ['userid' => $userid])->row_array();
     }
 
-    public function getdatatableby($table, $by, $id)
-    {
-        return $this->db->get_where($table, [$by => $id])->row_array();
+    public function getwhere($table, $by){
+        return $this->db->get_where($table, $by);
     }
+
+    public function getdatatableby($table, $by, $userid)
+    {
+        return $this->db->get_where($table, [$by => $userid])->row_array();
+    }
+
+    public function getresultdatatableby($table, $by, $userid)
+    {
+        return $this->db->get_where($table, [$by => $userid])->result();
+	}
 	
     public function update($table, $data, $where)
     {

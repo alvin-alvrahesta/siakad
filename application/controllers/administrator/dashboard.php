@@ -49,9 +49,10 @@ class Dashboard extends CI_Controller
         $this->load->view('administrator/makulview', $data);
         $this->load->view('wrapper/footer');
     }
+
     public function infomatakuliah($id_makul = null)
     {
-        $data['title'] = 'Mahasiswa Pengambil Matkul';
+        $data['title'] = 'Info Detail Matakuliah';
         $u = $this->Admin_model->getresultdatatableby('mahasiswa', 'id_makul', $id_makul);
         $data['mhs'] = $u;
         $u2 = $this->Admin_model->getresultdatatableby('dosen', 'id_makul', $id_makul);

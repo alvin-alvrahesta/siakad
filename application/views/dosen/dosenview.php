@@ -36,13 +36,11 @@
         <?php
 
         $no = 1;
-        foreach ($dosen as $data) : ?>
+        foreach ($dosen as $data) : if (!$data->nama_makul){break;}?>
 
             <tr>
                 <td><?= $no++ ?></td>
-                <!-- <td><?= $data->nrp ?></td>
-                <td><?= $data->username ?></td> -->
-                <td><?= $data->nama_makul ?></td>
+                <td><a href="<?php echo base_url('dosen/dashboard/infomatakuliah/' . $data->id_makul); ?>"><?= $data->nama_makul . ' '; ?><i class="fas fa-chevron-circle-right"></i></a></td>
                 <td width="20px"><button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $data->id; ?>"><i class="fas fa-trash"></i></button></td>
             </tr>
 

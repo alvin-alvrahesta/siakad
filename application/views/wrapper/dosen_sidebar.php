@@ -43,17 +43,6 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item
-			<?php if (current_url()==base_url('dosen/dashboard/inputnilaiview')) { ?>
-				active
-			<?php } ?>
-			">
-                <a class="nav-link" href="<?php echo base_url(); ?>dosen/dashboard/inputnilaiview">
-                    <i class="fas fa-tasks"></i>
-                    <span>Input Nilai</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('auth/logout') ?>">
                     <i class="fas fa-sign-out-alt"></i>
