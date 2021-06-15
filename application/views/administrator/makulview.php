@@ -27,7 +27,7 @@
                             <tr>
                                 <!--<td><?= $mkl->id_makul; ?></td>-->
 
-                                <td><a href="<?php echo base_url('/dashboard/infomahasiswa/' . $mkl->id_makul); ?>"><?= $mkl->nama_makul; ?></a></td>
+                                <td><a href="<?php echo base_url('administrator/dashboard/infomatakuliah/' . $mkl->id_makul); ?>"><?= $mkl->nama_makul . ' '; ?><i class="fas fa-chevron-circle-right"></i></a></td>
 
                                 <td>
                                     <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $mkl->id_makul; ?>"><i class="fas fa-edit"></i></button>

@@ -49,20 +49,26 @@ class Dashboard extends CI_Controller
         $this->load->view('administrator/makulview', $data);
         $this->load->view('wrapper/footer');
     }
-    public function infomahasiswa($id = null)
+    public function infomatakuliah($id_makul = null)
     {
         $data['title'] = 'Mahasiswa Pengambil Matkul';
-        $u = $this->Admin_model->getdatatableby('mahasiswa', 'id_makul', $id);
-        $mhs = $u['id_mhs'];
+        $u = $this->Admin_model->getresultdatatableby('mahasiswa', 'id_makul', $id_makul);
+        $data['mhs'] = $u;
+        $u2 = $this->Admin_model->getresultdatatableby('dosen', 'id_makul', $id_makul);
+        $data['dsn'] = $u2;
         $where_table = 'users';
-        $where_uid = 'id';
-        $u2 = $this->Admin_model->getresultdatatableby($where_table, $where_uid, $mhs);
-        $data['username'] = $u2;
-        $mahasiswa = $this->Admin_model->getAll('users')->result();
-        $data['mydata'] = $mahasiswa;
+        $where_role = 'userrole';
+        $u3 = $this->Admin_model->getresultdatatableby($where_table, $where_role, '4');
+        $data['umhs'] = $u3;
+        $u4 = $this->Admin_model->getresultdatatableby($where_table, $where_role, '2');
+        $data['udsn'] = $u4;
+        $makul = $this->Admin_model->getdatatableby('matakuliah', 'id_makul', $id_makul);
+        $data['nama_makul'] = $makul['nama_makul'];
+        $data['makuls'] = $id_makul;
+
         $this->load->view('wrapper/header', $data);
         $this->load->view('wrapper/admin_sidebar', $data);
-        $this->load->view('administrator/infomahasiswa', $data);
+        $this->load->view('administrator/infomatakuliah', $data);
         $this->load->view('wrapper/footer');
     }
 
@@ -363,6 +369,50 @@ class Dashboard extends CI_Controller
         $id = $this->Admin_model->getuserid($userid);
 
         redirect(base_url('administrator/dashboard/detailmakulview/' . $id['id'] . '/'), 'refresh');
+    }
+
+    public function update_mamakul()
+    {
+        $userid = $this->input->post('userid');
+        $id_makul =  $this->input->post('id_makul');
+        if (!isset($id_makul) || !isset($userid)) {
+            show_404();
+        }
+        $nilai = $this->input->post('nilai');
+        $data = array(
+            'nilai' => $nilai
+        );
+        $id = $this->Admin_model->getuserid($userid);
+        $this->Admin_model->update('mahasiswa', $data, "nim = '$userid' AND id_makul = '$id_makul'");
+        redirect(base_url('administrator/dashboard/infomatakuliah/' . $id_makul . '/'), 'refresh');
+    }
+
+    public function delete_makuliah()
+    {
+        $userid =  $this->uri->segment(4);
+        $id_makul =  $this->uri->segment(5);
+        if (!isset($id_makul) || !isset($userid)) {
+            show_404();
+        }
+        $this->Admin_model->Delete('mahasiswa', "nim = '$userid' AND id_makul = '$id_makul'");
+
+        //$id = $this->Admin_model->getdatatableby('matakuliah', 'id_makul', $id_makul);
+
+        redirect(base_url('administrator/dashboard/infomatakuliah/' . $id_makul . '/'), 'refresh');
+    }
+
+    public function delete_dokuliah()
+    {
+        $userid =  $this->uri->segment(4);
+        $id_makul =  $this->uri->segment(5);
+        if (!isset($id_makul) || !isset($userid)) {
+            show_404();
+        }
+        $this->Admin_model->Delete('dosen', "nrp = '$userid' AND id_makul = '$id_makul'");
+
+        //$id = $this->Admin_model->getdatatableby('matakuliah', 'id_makul', $id_makul);
+
+        redirect(base_url('administrator/dashboard/infomatakuliah/' . $id_makul . '/'), 'refresh');
     }
 
     public function updateprofile()
