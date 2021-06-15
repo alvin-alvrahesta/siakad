@@ -52,7 +52,7 @@ class Changepassword extends CI_Controller {
 
         $this->mahasiswa_model->update('users', $data, array('id' => $this->input->post('id')));
 		$this->session->set_flashdata('messageprofil', '<div class="row">
-		<div class="col-9"><div class="alert alert-success alert-dismissible">
+		<div class="col-12"><div class="alert alert-success alert-dismissible">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Password berhasil diupdate!</div></div></div>');
         redirect(base_url('mahasiswa/profil'), 'refresh');
 	}

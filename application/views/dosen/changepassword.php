@@ -11,7 +11,7 @@
                             <a href="<?= base_url('dosen/profil') ?>"><?php echo $profil->username ?></a>
                         </li>
 
-                        <li class="breadcrumb-item active">Edit Profil</li>
+                        <li class="breadcrumb-item active">Ganti Password</li>
                     </ol>
 
                     <!-- Page Heading -->
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-lg-6">
 
-                            <?= $this->session->flashdata('message'); ?>
+                            <?= $this->session->flashdata('messagepass'); ?>
 
                             <form action="<?= base_url('dosen/changepassword/updatepassword') ?>" method="post">
                                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $profil->id ?>">

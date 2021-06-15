@@ -7,16 +7,22 @@
     <!-- <div class="alert alert-success" role="alert">
         <i class="fas fa-tachometer-alt"></i> Dashboard
     </div> -->
-
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Selamat Datang</h4>
-        <p>Selamat Datang <strong> <?php echo $myuser['username']; ?></strong> di Sistem Informasi Akademik Universitas Jurang Belimbing, Anda Login sebagai <strong> <?php echo $myuser['username']; ?></strong></p>
-        <hr>
-        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
-            <i class="fas fa-cogs"></i> Control Panel
-        </button>
-
-    </div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h4 class="m-0 font-weight-bold text-primary">Selamat Datang</h4>
+				</div>
+				<div class="card-body">
+					<p>Selamat Datang <strong> <?php echo $myuser['username']; ?></strong> di Sistem Informasi Akademik Universitas Jurang Belimbing, Anda Login sebagai <strong> <?php echo $myuser['username']; ?></strong></p>
+					<hr>
+					<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
+						<i class="fas fa-cogs"></i> Control Panel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>	
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">

@@ -11,7 +11,7 @@
                             <a href="<?= base_url('mahasiswa/profil') ?>"><?php echo $profil->username ?></a>
                         </li>
 
-                        <li class="breadcrumb-item active">Edit Profil</li>
+                        <li class="breadcrumb-item active">Ganti Password</li>
                     </ol>
 
                     <!-- Page Heading -->

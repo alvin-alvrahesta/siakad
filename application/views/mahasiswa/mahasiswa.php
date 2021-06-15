@@ -1,13 +1,15 @@
 <div class="container-fluid">
-
-
-	<!-- <div class="alert alert-success" role="alert">
-		<i class="fas fa-university"></i> Mahasiswa
-	</div> -->
-	<div class="card mb-4 border-left-primary">
-		<div class="card-body">
-			<i class="fas fa-university fa-fw"></i>Mahasiswa
-		</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h5 class="m-0 font-weight-bold text-primary">Selamat Datang</h5>
+				</div>
+				<div class="card-body">
+					<p>Selamat Datang <strong> <?= $this->session->userdata('username') ?></strong> di Sistem Informasi Akademik Universitas Jurang Belimbing, Anda Login sebagai <strong> <?= $this->session->userdata('username') ?></strong></p>		
+				</div>
+			</div>
+		</div>	
 	</div>
 
 	<?php

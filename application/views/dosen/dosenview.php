@@ -1,10 +1,10 @@
 <div class="container-fluid">
-
-	<div class="card mb-4 border-left-primary">
-		<div class="card-body">
-			<i class="fas fa-university fa-fw"></i>Data Mata Kuliah yang Diampu
-		</div>
-	</div>
+	<ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="<?= base_url('dosen/dashboard/') ?>">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active ">Data Mata Kuliah yang Diampu</li>
+    </ol>
 
 	<?php
 		if ($this->session->flashdata('pesandosen')) {
