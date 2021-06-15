@@ -26,7 +26,9 @@
                         <?php foreach ($makuls as $mkl) { ?>
                             <tr>
                                 <!--<td><?= $mkl->id_makul; ?></td>-->
-                                <td><?= $mkl->nama_makul; ?></td>
+
+                                <td><a href="<?php echo base_url('/dashboard/infomahasiswa/' . $mkl->id_makul); ?>"><?= $mkl->nama_makul; ?></a></td>
+
                                 <td>
                                     <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editmodal<?= $mkl->id_makul; ?>"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletemodal<?= $mkl->id_makul; ?>"><i class="fas fa-trash"></i></button>

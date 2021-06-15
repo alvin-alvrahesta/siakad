@@ -49,6 +49,22 @@ class Dashboard extends CI_Controller
         $this->load->view('administrator/makulview', $data);
         $this->load->view('wrapper/footer');
     }
+    public function infomahasiswa($id = null)
+    {
+        $data['title'] = 'Mahasiswa Pengambil Matkul';
+        $u = $this->Admin_model->getdatatableby('mahasiswa', 'id_makul', $id);
+        $mhs = $u['id_mhs'];
+        $where_table = 'users';
+        $where_uid = 'id';
+        $u2 = $this->Admin_model->getresultdatatableby($where_table, $where_uid, $mhs);
+        $data['username'] = $u2;
+        $mahasiswa = $this->Admin_model->getAll('users')->result();
+        $data['mydata'] = $mahasiswa;
+        $this->load->view('wrapper/header', $data);
+        $this->load->view('wrapper/admin_sidebar', $data);
+        $this->load->view('administrator/infomahasiswa', $data);
+        $this->load->view('wrapper/footer');
+    }
 
     public function detailmakulview($id = null)
     {
@@ -76,7 +92,7 @@ class Dashboard extends CI_Controller
         }
         $u2 = $this->Admin_model->getresultdatatableby($where_table, $where_uid, $uid);
         $data['userid'] = $uid;
-        echo $data['userid'];
+        $data['userid'];
         $data['user'] = $u2;
         $data['role'] = $role;
         $makul = $this->Admin_model->getAll('matakuliah')->result();
@@ -289,19 +305,19 @@ class Dashboard extends CI_Controller
         $data = null;
         $role = null;
         $uid = null;
-        if ($userrole==2){
-            $role='dosen';
-            $uid ='nrp';
+        if ($userrole == 2) {
+            $role = 'dosen';
+            $uid = 'nrp';
         }
-        if ($userrole==4){
+        if ($userrole == 4) {
             $role = 'mahasiswa';
             $uid = 'nim';
         }
         $query = $this->Admin_model->getwhere($role, array($uid => $userid, 'id_makul' => $id_makul));
         $id = $this->Admin_model->getuserid($userid);
-        if($query->num_rows()){
+        if ($query->num_rows()) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Mata kuliah sudah dipilih!</div>');
-            redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
+            redirect(base_url('administrator/dashboard/detailmakulview/' . $id['id'] . '/'), 'refresh');
         }
         $data = array(
             $uid => $userid,
@@ -309,7 +325,7 @@ class Dashboard extends CI_Controller
         );
         $data = $this->Admin_model->Insert($role, $data);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Mata kuliah berhasil dipilih!</div>');
-        redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
+        redirect(base_url('administrator/dashboard/detailmakulview/' . $id['id'] . '/'), 'refresh');
     }
 
     public function update_pmakul()
@@ -326,7 +342,7 @@ class Dashboard extends CI_Controller
         );
         $id = $this->Admin_model->getuserid($userid);
         $this->Admin_model->update('mahasiswa', $data, "nim = '$userid' AND id_makul = '$id_makul'");
-        redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
+        redirect(base_url('administrator/dashboard/detailmakulview/' . $id['id'] . '/'), 'refresh');
     }
 
     public function delete_pmakul()
@@ -346,7 +362,7 @@ class Dashboard extends CI_Controller
 
         $id = $this->Admin_model->getuserid($userid);
 
-        redirect(base_url('administrator/dashboard/detailmakulview/'.$id['id'].'/'), 'refresh');
+        redirect(base_url('administrator/dashboard/detailmakulview/' . $id['id'] . '/'), 'refresh');
     }
 
     public function updateprofile()

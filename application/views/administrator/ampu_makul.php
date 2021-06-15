@@ -1,4 +1,3 @@
-<?php ?>
 <div class="container-fluid">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
