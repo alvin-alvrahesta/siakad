@@ -21,21 +21,33 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>administrator/dashboard/index">
+            <li class="nav-item
+			<?php if (current_url()==base_url('administrator/dashboard')) { ?>
+				active
+			<?php } ?>
+			">
+                <a class="nav-link" href="<?php echo base_url(); ?>administrator/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <li class="nav-item
+			<?php if (current_url()==base_url('administrator/dashboard/userview')) { ?>
+				active
+			<?php } ?>
+			">
                 <a class="nav-link" href="<?php echo base_url(); ?>administrator/dashboard/userview">
                     <i class="fas fa-users"></i>
                     <span>Data User</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item
+			<?php if (current_url()==base_url('administrator/dashboard/makulview')) { ?>
+				active
+			<?php } ?>
+			">
                 <a class="nav-link" href="<?php echo base_url(); ?>administrator/dashboard/makulview">
                     <i class="fas fa-tasks"></i>
                     <span>Data Mata Kuliah</span></a>

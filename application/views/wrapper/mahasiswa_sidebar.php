@@ -21,7 +21,11 @@
 			 <hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item">
+			<li class="nav-item
+			<?php if (current_url()==base_url('mahasiswa/mahasiswa')) { ?>
+				active
+			<?php } ?>
+			">
 				<a class="nav-link" href="<?php echo base_url(); ?>mahasiswa/mahasiswa">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>

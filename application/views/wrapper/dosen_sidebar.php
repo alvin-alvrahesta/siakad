@@ -21,21 +21,33 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item
+			<?php if (current_url()==base_url('dosen/dashboard')) { ?>
+				active
+			<?php } ?>
+			">
                 <a class="nav-link" href="<?php echo base_url(); ?>dosen/dashboard/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <li class="nav-item
+			<?php if (current_url()==base_url('dosen/dashboard/dosenview')) { ?>
+				active
+			<?php } ?>
+			">
                 <a class="nav-link" href="<?php echo base_url(); ?>dosen/dashboard/dosenview">
                     <i class="fas fa-users"></i>
                     <span>Mata Kuliah yang Diampu</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item
+			<?php if (current_url()==base_url('dosen/dashboard/inputnilaiview')) { ?>
+				active
+			<?php } ?>
+			">
                 <a class="nav-link" href="<?php echo base_url(); ?>dosen/dashboard/inputnilaiview">
                     <i class="fas fa-tasks"></i>
                     <span>Input Nilai</span></a>

@@ -26,11 +26,11 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="username" name="username" aria-describedby="userHelp"
-                                                placeholder="Masukan Username...">
+                                                placeholder="Masukan Username..." required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Masukan Password...">
+                                                id="password" name="password" placeholder="Masukan Password..." required>
                                         </div>
                                         <!--<div class="form-group">
                                             <div class="custom-control custom-checkbox small">
